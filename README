@@ -1,0 +1,10 @@
+This is my first serious program, (as in not an exercise).
+
+I am learning about using functions, instead of having one long process.
+I am also making as much as possible myself; I want to learn about  the algorithms now, and explore various modules later, when I understand more.
+
+This program relates to my work, where students write an essay based on a series of academic texts given to them in a reading pack. 
+The program looks for words or phrases in the essay which are taken directly from the reading pack.
+At the moment, it returns a list containing all such words and phrases; in the future I want it to highlight these phrases in the original MS Word document. I am now looking at unzipped .docx files, and confess that I am a little daunted by the complexity of the xml formatting. Time to learn some more about regular expressions.
+
+Finally, hello John - I am sure you are the only person who will ever read this.
