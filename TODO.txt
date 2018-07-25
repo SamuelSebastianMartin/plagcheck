@@ -1,0 +1,15 @@
+To-do list for plagcheck.py
+
+
+FUNCTION
+
+Remove fragments of words in the results: eg "I like w".
+Incorporate a sensitivity level.
+Return a copy of the original essay with highlighted results.
+
+
+USEABILITY
+
+Improve filepicker to point-and-click GUI.
+Process multiple essays.
+Package for colleagues to use on MS Windows.
