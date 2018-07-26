@@ -9,20 +9,25 @@ def lsPrint():
     '''Prints a numbered list of useful files in cwd.
     Only those beginning with a letter
     and which have a '.' in them.'''
-    print()
+    print("")
     # get list of relevant files (not .file or directories)
-    ls = os.listdir()
+    ls = os.listdir('.')
     dirList = []
     for item in ls:
         if item[0][0].isalpha() and '.' in item:
             dirList.append(item)
     # print out the numbered file list
     for i in range(len(dirList)):
-        print(i, end='. ')
-        print(dirList[i])
-    print()
+        print(str(i) + '. ' + dirList[i])
+    print("")
     return dirList
 
+def RepresentsInt(s):
+    try: 
+        int(s)
+        return True
+    except ValueError:
+        return False
 
 def inputSentinelInt(From=0, To=999, message='Please pick a number: '):
     ''''Provides a sentinel restriction on input
@@ -35,7 +40,7 @@ def inputSentinelInt(From=0, To=999, message='Please pick a number: '):
     It returns the number as int'''
     number = 'a'  # dummy value
     # control imput to numer withing correct range
-    while not number.isnumeric() or int(From) > int(number) \
+    while not RepresentsInt(number) or int(From) > int(number) \
                                  or int(number) > int(To):
         number = input(message)
     number = int(number)
