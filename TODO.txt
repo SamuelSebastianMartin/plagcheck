@@ -13,3 +13,10 @@ USEABILITY
 Improve filepicker to point-and-click GUI.
 Process multiple essays.
 Package for colleagues to use on MS Windows.
+
+QUESTIONS
+
+Am I missing some results due to the 'remove duplicates' function? 
+For example, it they all start with the word 'a', then 'a big dog' should
+replace 'a' and 'a big'. However, if 'a big' appears independently elsewhere
+in the essay, it should not be removed. Check to see if this is occurring.
