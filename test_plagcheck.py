@@ -2,7 +2,6 @@
 
 import unittest
 import plagcheck
-from plagcheck import get_texts  # I don't know why I need this.
 
 class TestPlagcheck(unittest.TestCase):
 
@@ -16,17 +15,18 @@ class TestPlagcheck(unittest.TestCase):
         rp = 'wobbly elephant legs'
         sa = 'wobbly elephant'
         unique_words = ['wobbly', 'elephant', 'legs']
+        answer = ['wobbly elephant', 'elephant']
         result = plagcheck.find_matches(rp, sa, unique_words)
-        self.assertEqual(result, sa)
+        self.assertEqual(result, answer)
 
     def test2_find_matches(self):
         '''includes leading small words, like 'the' or 'a'.'''
         rp = 'the wobbly elephant legs'
         sa = 'the wobbly elephant'
         unique_words = ['wobbly', 'elephant', 'legs']
+        answer = ['the wobbly elephant', 'the elephant']
         result = plagcheck.find_matches(rp, sa, unique_words)
-        self.assertEqual(result, sa)
-
+        self.assertEqual(result, answer)
 
 
 if __name__ == '__main__':
