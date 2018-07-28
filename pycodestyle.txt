@@ -1,3 +1,0 @@
-plagcheck.py:63:50: E502 the backslash is redundant between brackets
-plagcheck.py:73:80: E501 line too long (1221 > 79 characters)
-plagcheck.py:131:62: E502 the backslash is redundant between brackets
