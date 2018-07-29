@@ -2,12 +2,12 @@
 
 '''A module to use with 'plagcheck.py'''
 
-def get_text_names():
-    import filepicker  # My own module. Must be in the same directory.
-    reading_pack = filepicker.filepicker('reading pack')  # User input.
-    essay = filepicker.filepicker('essay')  # User input.
-    texts = [reading_pack, essay]
-    return texts
+#def get_text_names():
+#    import filepicker  # My own module. Must be in the same directory.
+#    reading_pack = filepicker.filepicker('reading pack')  # User input.
+#    essay = filepicker.filepicker('essay')  # User input.
+#    texts = [reading_pack, essay]
+#    return texts
 
 
 def open_text(text):
@@ -31,10 +31,10 @@ def prepare_text(text):
     return text
 
 
-def get_texts():
+def get_texts(texts):
     """This function and sub-functions opens and prepares the two texts,
     returning clean texts, a list of unique words, and the original essay"""
-    texts = get_text_names()
+#    texts = get_text_names()
     reading_pack = open_text(texts[0])
     original_essay = open_text(texts[1])
     rp = prepare_text(reading_pack)

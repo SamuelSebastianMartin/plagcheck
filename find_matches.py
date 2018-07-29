@@ -26,6 +26,9 @@ def find_occurrences(word, text):
     return occurrences
 
 
+
+
+
 def find_matches(rp, sa, wordset):
     """ for each unique word:
            for each occurance of word in sa:
