@@ -101,7 +101,7 @@ def find_matches(rp, sa, unique_words):
            longest matching string begining at those points'''
         while sa[sa_occur:sa_occur + str_length] == rp[rp_occur:rp_occur + str_length]:
             match = sa[sa_occur:sa_occur + str_length]
-            str_length += 2  # Should still catch whole words if not 1.
+            str_length += 1  # Should still catch whole words if not 1.
             if match == sa[sa_occur:sa_occur + str_length]:
                 break  # Avoid infinite loop at end of strings.
         return match
