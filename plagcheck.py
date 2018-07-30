@@ -42,20 +42,20 @@ def get_texts():
     """This function and sub-functions opens and prepares the two texts,
     returning clean texts, a list of unique words, and the original essay"""
 
-    def get_text_names():  # Please develop to allow selection of text.
+    def get_text_names():
         import filepicker  # My own module. Must be in the same directory.
-        reading_pack = filepicker.filepicker('reading pack')  # User input.
-        essay = filepicker.filepicker('essay')  # User input.
+        reading_pack = filepicker.filepicker('READING PACK')  # User input.
+        essay = filepicker.filepicker('ESSAY')  # User input.
         texts = [reading_pack, essay]
         return texts
 
-    def open_text(text):  # Used to open files - txt only for now.
+    def open_text(text):  # Used to open txt only for now.
         myfile = open(text, 'r')
         document = myfile.read()
         myfile.close()
         return document
 
-    def prepare_text(text):  # Working.
+    def prepare_text(text):
         import string
         # Return without punctuation, lowercase, single spaced.
         text = text.lower()
@@ -69,6 +69,8 @@ def get_texts():
         all_essay_words = text.split()
 
          # Remove common words to save processing.
+         # It halves processing time, but means that a copied phrase like:
+         # 'the big dog' would only report 'big dog'.
         stoplist = ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', 'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', 'her', 'hers', 'herself', 'it', 'its', 'itself', 'they', 'them', 'their', 'theirs', 'themselves', 'what', 'which', 'who', 'whom', 'this', 'that', 'these', 'those', 'am', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'having', 'do', 'does', 'did', 'doing', 'a', 'an', 'the', 'and', 'but', 'if', 'or', 'because', 'as', 'until', 'while', 'of', 'at', 'by', 'for', 'with', 'about', 'against', 'between', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over', 'under', 'again', 'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 's', 't', 'can', 'will', 'just', 'don', 'should', 'now', 'd', 'll', 'm', 'o', 're', 've', 'y', 'ain', 'aren', 'couldn', 'didn', 'doesn', 'hadn', 'hasn', 'haven', 'isn', 'ma', 'mightn', 'mustn', 'needn', 'shan', 'shouldn', 'wasn', 'weren', 'won', 'wouldn']
         for stop in stoplist:
             while stop in all_essay_words:
@@ -95,7 +97,7 @@ def find_matches(rp, sa, unique_words):
                for each occurance of word in rp:
                    check for matches in texts.    """
     
-    def find_longest_match(rp, sa, rp_occur, sa_occur, str_length):  # Working.
+    def find_longest_match(rp, sa, rp_occur, sa_occur, str_length):
         '''if passed the string index of a word in both
            the sa and the rp, it will find and return the 
            longest matching string begining at those points'''
