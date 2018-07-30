@@ -26,29 +26,36 @@ def find_occurrences(word, text):
     return occurrences
 
 
+rp = ['the', 'essay', 'with', 'repeated', 'phrases', 'has', 'repeated', 'phrases']
+sa = ['some', 'repeated', 'phrases', 'in', 'essay']
+wordset = ['some', 'repeated', 'phrases', 'in', 'essay']
+rstart = 3  # 'repeated'
+sstart = 1
+
+def find_matches(rp, sa, sstart, rstart):
+    for n in range(1, 4):  # Start = 1 to avoid '[]' as first term.
+        sstop = sstart + n
+        rstop = rstart + n
+        print('sa = ', sa[sstart:sstop])
+        print('rp = ', rp[rstart:rstop])
 
 
-
-def find_matches(rp, sa, wordset):
-    """ for each unique word:
-           for each occurance of word in sa:
-               for each occurance of word in rp:
-                   check for matches in texts.    """
-    # This should change, perhaps with a check forward/backwards counter
-    # e.g.  m += n, where n is + or - 1 word. This will allow the capture
-    # of words like 'the' or 'an' before the words in 'wordset', once it
-    # has been stripped of stop-words.
-    duplicates_list = []
-    for word in wordset:
-        sa_occurrences = find_occurrences(word, sa)
-        for sa_occur in sa_occurrences:
-            rp_occurrences = find_occurrences(word, rp)
-            match = []  # ?
-            for rp_occur in rp_occurrences:
-                match = longest(rp, sa, rp_occur, sa_occur) 
-            duplicates_list.append(match)
-    return duplicates_list
-
+#    a, b = 0, 1  # Set counters.
+#    duplicates_list = []
+#    while b < len(sa)-2 and a < len(sa)-1:
+#        word = sa[a:b]
+#        print('word = ', word)
+#        occurrences = find_occurrences(word, rp)
+#        match = []
+#        for i in occurrences:
+#            while sa[a:b] == rp[m:m + (b-a)]:
+#                print('sa[a:b] = ', sa[a:b])
+#                match = sa[a:b]
+#                b =+ 1
+#            duplicates_list.append(match)
+#        a += 1
+#        b = a + 1
+#    return duplicates_list
 
 if __name__ == '__main__':
-    find_matches(rp, sa, wordset)
+    find_matches(rp, sa, sstart, rstart)
