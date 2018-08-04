@@ -17,40 +17,52 @@ class TestAdd(unittest.TestCase):
 
 
 
-    def test_longest1(self):
+    def test_longest_match1(self):
         # find match at end of sa
         rp = ['dud','dud', 'the', 'longest', 'match', 'dud', 'dud']
         sa = ['dud', 'the', 'longest', 'the', 'longest', 'match']
         ans = ['the', 'longest', 'match']
         rp_occur = 2
         sa_occur = 3
-        result = find_matches.longest(rp, sa, rp_occur, sa_occur)
+        result = find_matches.longest_match(rp, sa, rp_occur, sa_occur)
         self.assertEqual(result, ans)
         
     
-    def test_longest2(self):
+    def test_longest_match2(self):
         # Avoid a second and longer occurance when passed the 1st occurence.
         rp = ['dud','dud', 'the', 'longest', 'match', 'dud', 'dud']
         sa = ['dud', 'the', 'longest', 'the', 'longest', 'match']
         ans = ['the', 'longest']
         rp_occur = 2
         sa_occur = 1
-        result = find_matches.longest(rp, sa, rp_occur, sa_occur)
+        result = find_matches.longest_match(rp, sa, rp_occur, sa_occur)
         self.assertEqual(result, ans)
         
+    def test_longstring_only1(self):
+       matches = [['the', 'bus'], ['the']]
+       ans = ['the', 'bus']
+       result = find_matches.longstring_only(matches)
+       self.assertEqual(result, ans)
     
-#    def test_find_matches(self):
-#        rp = ['the', 'essay', 'with', 'repeated', 'phrases', 'has', 'repeated', 'phrases']
-#        sa = ['some', 'repeated', 'phrases', 'in', 'essay']
-#        wordset = ['some', 'repeated', 'phrases', 'in', 'essay']
-#        ans = [['repeated', 'phrases']]
-#        result = find_matches.find_matches(rp, sa, wordset)
-#        self.assertEqual(result, ans)
-#        # 2 instances of same phrase in sa
-#        sa = ['some', 'repeated', 'phrases', 'in', 'essay', 'repeated', 'phrases']
-#        ans = [['repeated', 'phrases'], ['repeated', 'phrases']]
-#        result = find_matches.find_matches(rp, sa, wordset)
-#        self.assertEqual(result, ans)
+        
+    def test_longstring_only2(self):
+       matches = [['bus'], ['bus']]
+       ans = ['bus']
+       result = find_matches.longstring_only(matches)
+       self.assertEqual(result, ans)
+    
+    def test_find_matches(self):
+        rp = ['the', 'essay', 'with', 'repeated', 'phrases', 'has', 'repeated', 'phrases']
+        sa = ['some', 'repeated', 'phrases', 'in', 'essay']
+        wordset = ['some', 'repeated', 'phrases', 'in', 'essay']
+        ans = [['repeated', 'phrases']]
+        result = find_matches.find_matches(rp, sa)
+        self.assertEqual(result, ans)
+        # 2 instances of same phrase in sa
+        sa = ['some', 'repeated', 'phrases', 'in', 'essay', 'repeated', 'phrases']
+        ans = [['repeated', 'phrases'], ['repeated', 'phrases']]
+        result = find_matches.find_matches(rp, sa)
+        self.assertEqual(result, ans)
 
 
 if __name__ == '__main__':
