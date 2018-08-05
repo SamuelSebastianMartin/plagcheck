@@ -2,13 +2,6 @@
 
 '''A module to use with 'plagcheck.py'''
 
-#def get_text_names():
-#    import filepicker  # My own module. Must be in the same directory.
-#    reading_pack = filepicker.filepicker('reading pack')  # User input.
-#    essay = filepicker.filepicker('essay')  # User input.
-#    texts = [reading_pack, essay]
-#    return texts
-
 
 def open_text(text):
     myfile = open(text, 'r')
@@ -39,8 +32,8 @@ def get_texts(texts):
     original_essay = open_text(texts[1])
     rp = prepare_text(reading_pack)
     sa = prepare_text(original_essay)
-    wordset = word_set(sa)
-    return rp, sa, original_essay, wordset
+    sa.append('#23!@23Ap9$')  # Unmatchable final value on sa
+    return rp, sa
 
 
 if __name__ == '__main__':

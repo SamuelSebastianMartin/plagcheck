@@ -19,12 +19,11 @@ import find_matches
 def main():
     level = welcome()
     textnames = get_text_names()
-    rp, sa, unique_words, original_essay = get_texts(textnames)
-    duplicates_list = find_matches(rp, sa, unique_words)
-    duplicates = remove_substrings(duplicates_list)
-    highlighted_essay = results(duplicates, original_essay)
-    save_as(highlighted_essay)
-
+    rp, sa = get_texts.get_texts(textnames)
+    duplicates = find_matches.find_matches(rp, sa)
+    print('These are the duplicated words and phrases')
+    for result in duplicates:
+        print(result)
 
 def welcome():
     print("""
@@ -43,9 +42,9 @@ def get_text_names():
     return texts
 
 def results(duplicates, original_essay):
-     '''Takes the original essay (for now only as .txt)
-     and highlights the strings which are
-     copied from the reading pack (for now as CAPS)'''
+    '''Takes the original essay (for now only as .txt)
+    and highlights the strings which are
+    copied from the reading pack (for now as CAPS)'''
     highlighted_essay = original_essay  # For now.
     return highlighted_essay
 
