@@ -13,7 +13,6 @@
                 check for matches in texts.    """
 
 import get_texts
-import remove_substrings
 import find_matches
 
 def main():

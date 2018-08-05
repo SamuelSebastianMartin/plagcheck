@@ -14,7 +14,7 @@ def lsPrint():
     ls = os.listdir()
     dirList = []
     for item in ls:
-        if item[0][0].isalpha() and '.' in item:
+        if item[0][0].isalpha() and '.txt' in item:
             dirList.append(item)
     # print out the numbered file list
     for i in range(len(dirList)):

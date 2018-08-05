@@ -1,8 +1,7 @@
 #! /usr/bin/env python3
 
 import logging
-logging.basicConfig(level=logging.DEBUG)
-
+logging.basicConfig(level=logging.CRITICAL)
 
 def find_occurrences(word, text): # working
     ''' finds the indexes for every
