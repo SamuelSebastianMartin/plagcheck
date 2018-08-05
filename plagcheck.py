@@ -22,7 +22,9 @@ def main():
     duplicates = find_matches.find_matches(rp, sa)
     print('These are the duplicated words and phrases')
     for result in duplicates:
-        print(result)
+        critical_length = 2
+        if len(result) > critical_length:
+            print(result)
 
 def welcome():
     print("""

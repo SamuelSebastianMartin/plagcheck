@@ -26,7 +26,7 @@ def longest_match(rp, sa, rstart, sstart):
         if sa[sstart:sstart + n] == rp[rstart:rstart + n]:
             pass
         else:
-            print('longest = ', sa[sstart:sstart + n-1])
+            logging.debug('longest = ', sa[sstart:sstart + n-1])
             return sa[sstart:sstart + n-1]
 
 def longstring_only(matches):
