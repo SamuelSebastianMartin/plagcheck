@@ -41,16 +41,6 @@ def get_text_names():
     texts = [reading_pack, essay]
     return texts
 
-def results(duplicates, original_essay):
-    '''Takes the original essay (for now only as .txt)
-    and highlights the strings which are
-    copied from the reading pack (for now as CAPS)'''
-    highlighted_essay = original_essay  # For now.
-    return highlighted_essay
-
-
-def save_as(highlighted_essay):
-    ''' Prompts for filename and saves the essay with results (for now as .txt)'''
 
 
 if __name__ == '__main__':
