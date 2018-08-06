@@ -1,4 +1,4 @@
-This is my first serious program, (as in not an exercise).
+This is my first serious program, (as in not an exercise), and this branch represents my first serious rewrite!
 
 I am learning about using functions, instead of having one long process.
 I am also making as much as possible myself; I want to learn about  the algorithms now, and explore various modules later, when I understand more.
@@ -7,4 +7,5 @@ This program relates to my work, where students write an essay based on a series
 The program looks for words or phrases in the essay which are taken directly from the reading pack.
 At the moment, it returns a list containing all such words and phrases; in the future I want it to highlight these phrases in the original MS Word document. I am now looking at unzipped .docx files, and confess that I am a little daunted by the complexity of the xml formatting. Time to learn some more about regular expressions.
 
-Finally, hello John - I am sure you are the only person who will ever read this.
+After learning about testing code, I discovered that the program was not performing correctly. I think that an approach using 'list' in place of 'strings' might resolve the main problem, which was the incorporation of incomplete words in the results.
+In order to facilitate the running of python's 'unittest', I have also decided to build the project with few or no nested functions, but to use modules to group functions together. Detailed test can then be run on modules, and more general tests can be run on the main program.

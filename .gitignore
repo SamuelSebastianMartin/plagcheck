@@ -5,3 +5,5 @@ __pycache__
 pycodestyle.txt
 trial_texts
 py_unittest.template
+logging_module.py
+stopwords.txt
