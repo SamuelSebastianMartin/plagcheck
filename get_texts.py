@@ -10,11 +10,6 @@ def open_text(text):
     return document
 
 
-def word_set(sa):
-    unique_essay_words = list(set(sa))
-    return unique_essay_words
-
-
 def prepare_text(text):
     '''String -> list - lowercase without punctuation.'''
     import string

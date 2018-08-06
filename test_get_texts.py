@@ -17,12 +17,6 @@ class TestAdd(unittest.TestCase):
         L = len(text)
         self.assertNotEqual(L, 0)
 
-    def test_word_set(self):
-        sa = ['one', 'two', 'three', 'two', 'three', 'three']  # Add 'the'.
-        wordset = get_texts.word_set(sa)
-        result = len(wordset)
-        self.assertEqual(result, 3)
-
     def test_prepare_text(self):
         text = 'The. fiSH & chips!\n me@mail!!! (3): www.dog'
         out = ['the', 'fish', 'chips', 'memail', '3', 'wwwdog']

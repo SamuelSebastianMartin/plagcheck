@@ -3,20 +3,12 @@ To-do list for plagcheck.py
 
 FUNCTION
 
-Remove fragments of words in the results: eg "I like w".
 Incorporate a sensitivity level.
 Return a copy of the original essay with highlighted results.
-
+modify 'get_text()' to work with MS Word docx files.
 
 USEABILITY
 
 Improve filepicker to point-and-click GUI.
 Process multiple essays.
 Package for colleagues to use on MS Windows.
-
-QUESTIONS
-
-Am I missing some results due to the 'remove duplicates' function? 
-For example, it they all start with the word 'a', then 'a big dog' should
-replace 'a' and 'a big'. However, if 'a big' appears independently elsewhere
-in the essay, it should not be removed. Check to see if this is occurring.
