@@ -1,35 +1,35 @@
 
  ____________________
-|                    |  Print welcome and get any imput about sensitivity
+|                    |  Print explanation and get any imput about sensitivity
 |                    |
 |   Welcome()        |
 |                    |
 |____________________|
- ____________________
+ __________|_________
 |                    |  Use 'filepicker' module to select the texts
 |                    |  that will be compared.
 |  Get_text_names()  |
 |                    |
 |____________________|
- ____________________
+ __________|_________
 |                    |  MODULE:
 |                    |  - Open_text()
 |  Get_texts()       |  - Prepare_text()
 |                    |
 |____________________|
- ____________________
+ __________|_________
 |                    |  MODULE:  crawls through sa finding matches in rp.
 |                    |  - Find_occurrences() of each sa word in the rp.
-|  Find_matches()    |  - Longest_match() of copied text for each occurrence.
-|                    |  - Longstring_only() rejects shortest match.
+|  Find_matches()    |  - Longest_match() between texts, for each occurrence.
+|                    |      > Longstring_only() rejects shortest match.
 |____________________|
- ____________________
+ __________|_________
 |                    |  Remove strings with fewer than X=3 words.
 |                    |
 |  Filter()          |
 |                    |
 |____________________|
- ____________________
+ __________|_________
 |                    |  Present results
 |                    |
 |  results()         |

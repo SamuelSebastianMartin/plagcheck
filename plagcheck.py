@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 
 # Must be in same folder as the essay, reading_pack and
@@ -16,6 +15,7 @@
 import get_texts
 import find_matches
 
+
 def main():
     level = welcome()
     textnames = get_text_names()
@@ -28,7 +28,8 @@ def main():
 def welcome():
     print("""
         PLAGIARISM CHECKER
-        
+
+
         This program finds snippets of text in an essay which have
         been copied from the reading pack.
         """)
@@ -41,11 +42,13 @@ def get_text_names():
     texts = [reading_pack, essay]
     return texts
 
+
 def filter(duplicates):
     '''Filters the results'''
     critical = 3  # Minimum number of plag words to check for.
     shortlist = [phrs for phrs in duplicates if len(phrs) >= critical]
     return shortlist
+
 
 def results(shortlist):
     for result in shortlist:

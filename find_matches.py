@@ -3,18 +3,20 @@
 import logging
 logging.basicConfig(level=logging.CRITICAL)
 
-def find_occurrences(word, text): # working
+
+def find_occurrences(word, text):  # working
     ''' finds the indexes for every
     occurrence of the word in the text, and
     retcurns them as a list'''
     occurrences = []
     n = text.count(word)
     m = 0
-    for i in range(n): # only look n times
-        occurrence = text.index(word, m) # start at m
+    for i in range(n):  # only look n times
+        occurrence = text.index(word, m)  # start at m
         occurrences.append(occurrence)
         m = occurrence + 1
     return occurrences
+
 
 def longest_match(rp, sa, rstart, sstart):
     '''When given the index of 2 identical words in sa and rp,
@@ -28,6 +30,7 @@ def longest_match(rp, sa, rstart, sstart):
         else:
             logging.debug('longest = ', sa[sstart:sstart + n-1])
             return sa[sstart:sstart + n-1]
+
 
 def longstring_only(matches):
     '''Compares 2 lists of words where one is a subset of the other
@@ -59,14 +62,15 @@ def find_matches(rp, sa):
         rp_occurrences = find_occurrences(word, rp)
         logging.debug('Occurrences in rp = {}'.format(rp_occurrences))
         if rp_occurrences != []:
-            logging.debug("Word = {} occurrences = {}".format(word, rp_occurrences))
+            logging.debug("Word = {} occurrences = {}"
+                          .format(word, rp_occurrences))
             matches = [longest_match(rp, sa, index, pointer)
-                    for index in rp_occurrences]
+                       for index in rp_occurrences]
             matches = longstring_only(matches)
             logging.debug("matches: {}".format(matches))
             all_matches.append(matches)
             #  Move sa pointer to end of this matched phrase.
-            pointer += len (matches)
+            pointer += len(matches)
         else:
             pointer += 1
     logging.debug('\n all_matches = {}'.format(all_matches))

@@ -3,10 +3,17 @@
 '''A module to use with 'plagcheck.py'''
 
 
-def open_text(text):
-    myfile = open(text, 'r')
-    document = myfile.read()
+import docx
+
+
+def open_text(textname):
+    myfile = open(textname, 'rb')  # b option allows binaries in Windows OS.
+    doc = docx.Document(myfile)
     myfile.close()
+    # Join docx.paragraphs into single text
+    doctext = [para.text for para in doc.paragraphs]
+    document = ''.join(doctext)
+    print(document)
     return document
 
 

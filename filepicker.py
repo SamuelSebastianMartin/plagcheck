@@ -14,7 +14,7 @@ def lsPrint():
     ls = os.listdir()
     dirList = []
     for item in ls:
-        if item[0][0].isalpha() and '.txt' in item:
+        if item[0][0].isalpha() and '.docx' in item:
             dirList.append(item)
     # print out the numbered file list
     for i in range(len(dirList)):
@@ -36,7 +36,7 @@ def inputSentinelInt(From=0, To=999, message='Please pick a number: '):
     number = 'a'  # dummy value
     # control imput to numer withing correct range
     while not number.isnumeric() or int(From) > int(number) \
-                                 or int(number) > int(To):
+            or int(number) > int(To):
         number = input(message)
     number = int(number)
     return number
