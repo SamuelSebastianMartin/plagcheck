@@ -4,16 +4,17 @@
 
 
 import docx
+import logging
 
+logging.basicConfig(level=logging.CRITICAL)
 
 def open_text(textname):
-    myfile = open(textname, 'rb')  # b option allows binaries in Windows OS.
-    doc = docx.Document(myfile)
-    myfile.close()
+    doc = docx.Document(textname)  # Create a Document object.
+    logging.debug("Num of paras - {}".format(len(doc.paragraphs)))
     # Join docx.paragraphs into single text
     doctext = [para.text for para in doc.paragraphs]
     document = ''.join(doctext)
-    print(document)
+    logging.debug("whole text - {}".format(document))
     return document
 
 

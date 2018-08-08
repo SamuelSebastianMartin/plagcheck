@@ -3,12 +3,20 @@
 
 import unittest
 import get_texts
+import os
+import docx
 
 class TestAdd(unittest.TestCase):
 
     def test_open_text(self):
-        # Using this file as only securechoice is directory list.
-        text = get_texts.open_text('get_texts.py')
+        # Make new .docx file to open for testing.
+        doc = docx.Document()
+        doc.add_paragraph('Suck my Git.')
+        doc.add_paragraph('Suck my doc.')
+        doc.save('deleteme_testfile.docx')
+
+        text = get_texts.open_text('deleteme_testfile.docx')
+        os.remove('deleteme_testfile.docx')  # Clean up directory.
         # Text is a string.
         t_type = type(text)
         s_type = type('random string')
