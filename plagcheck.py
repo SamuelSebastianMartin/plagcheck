@@ -19,10 +19,10 @@ import find_matches
 def main():
     level = welcome()
     textnames = get_text_names()
-    rp, sa = get_texts.get_texts(textnames)
+    rp, sa, original_essay = get_texts.get_texts(textnames)
     duplicates = find_matches.find_matches(rp, sa)
     shortlist = filter(duplicates)
-    results(shortlist)
+    results(shortlist, original_essay)
 
 
 def welcome():
@@ -50,7 +50,7 @@ def filter(duplicates):
     return shortlist
 
 
-def results(shortlist):
+def results(shortlist, original_essay):
     for result in shortlist:
         print(' '.join(result))
 

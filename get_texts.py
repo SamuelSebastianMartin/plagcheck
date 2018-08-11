@@ -36,7 +36,7 @@ def get_texts(texts):
     rp = prepare_text(reading_pack)
     sa = prepare_text(original_essay)
     sa.append('#23!@23Ap9$')  # Unmatchable final value on sa
-    return rp, sa
+    return rp, sa, original_essay
 
 
 if __name__ == '__main__':
