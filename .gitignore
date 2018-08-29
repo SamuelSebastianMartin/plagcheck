@@ -8,9 +8,12 @@ py_unittest.template
 logging_module.py
 stopwords.txt
 deleteme_results_testfile.docx
-	test_delete.xml
-	test_underline.xml
-	underline.docx
 test_delete.xml
 test_underline.xml
 underline.docx
+test_delete.xml
+test_underline.xml
+underline.docx
+docxout.txt
+zipper
+'.gitignore'
