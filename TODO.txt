@@ -5,7 +5,7 @@ FUNCTION
 
 Incorporate a sensitivity level.
 Return a copy of the original essay with highlighted results.
-modify 'get_text()' to work with MS Word docx files.
+remove sources from prepared text. This could be remove all '(....... \d\d\d\d)', or 'Camel Case (\d\d\d\d)'
 
 USEABILITY
 

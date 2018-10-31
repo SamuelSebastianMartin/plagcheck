@@ -21,8 +21,8 @@ def open_text(textname):
 def prepare_text(text):
     '''String -> list - lowercase without punctuation.'''
     import string
-    text = text.lower()
-    text = "".join((char for char in text if char not in string.punctuation))
+#    text = text.lower()
+#    text = "".join((char for char in text if char not in string.punctuation))
     text = text.split()
     return text
 
