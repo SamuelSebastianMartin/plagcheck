@@ -18,7 +18,7 @@ def main():
 def set_up():
     '''creates sa and rp object for testing purposes only'''
     sa = 'The cat, Tom, sat on the mat.'
-    matches = ['sat on the']
+    matches = ['sat on the', 'the cat']
     return (sa, matches)
 
 
@@ -34,7 +34,7 @@ def find_run(sa, matches, link):
         match_words = match.split()
         search_str = link.join(match_words)
 
-        regex = re.compile(search_str)
+        regex = re.compile(search_str, re.IGNORECASE)
         regout = regex.search(sa)
         run = regout.group()
 
