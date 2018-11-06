@@ -9,46 +9,31 @@ import os
 import get_texts
 import shutil
 
-
-###########################################
-# Make new dummy docx.Document object, and shortlist to use for testing.
-doc = docx.Document()
-doc.add_paragraph('This is the good text.')
-doc.add_paragraph('This, however, is the plagerised text - to be highlighted.')
-doc.add_paragraph('This is good text.')
-doc.save('deleteme_results_testfile.docx')
-
-
-shortlist = [['this', 'however', 'is', 'the', 'plagiarised',
-              'text', 'to', 'be', 'highlighted']]
-
-
-###########################################
-# Read and process the text
-def main():
-    doc = docx.Document('deleteme_results_testfile.docx')
-    #  Here, doc represents the original essay submitted by the student
-    #  and 'shortlist' is the output of 'plagcheck.py' from that same essay.
-    full_text = [para.text for para in doc.paragraphs]
-    original_essay = ' '.join(full_text)
-    results(shortlist, original_essay)
+def fake_results():
+    original_essay = 'this is the good text. This, however, is the plagerised text - to be highlighted. This is good text.'
+    shortlist = ['This, however, is', 'plagerised text - to be highlighted.']
+    return(original_essay, shortlist)
 
 
 def results(shortlist, original_essay):
-    '''For now, this does nothing put print the text to standard out,
-    but it is exactly here that the work will be done'''
+    old_index = 0
+    out_document = docx.Document()
     for result in shortlist:
-        print(' '.join(result))
-    print(original_essay)
+        index = original_essay.index(result)
+        para = out_document.add_paragraph()
+        para.add_run(original_essay[old_index: index])
+    out_document.save('out_document.docx')
 
+
+def main():
+    original_essay, shortlist = fake_results()
+    results(shortlist, original_essay)
+    os.system('libreoffice out_document.docx')
+    os.system('rm out_document.docx')
 
 if __name__ == '__main__':
     main()
 
-
-###########################################
-#  Clean up the directory
-os.remove('deleteme_results_testfile.docx')  # Clean up directory.
 
 '''notes on docx module from 'automate the boring stuff'''
 #    import docx
