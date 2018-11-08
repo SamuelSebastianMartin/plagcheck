@@ -34,8 +34,8 @@ class TestAdd(unittest.TestCase):
         self.assertEqual(result, 'we know')
 
 
-    def test_match_status(self):
-        #  Checks that match -> True, and no match -> False
+    def test_match_status1(self):
+        #  Checks that match -> True
         i = 0
         j = 1
         matches = []
@@ -44,6 +44,19 @@ class TestAdd(unittest.TestCase):
 
         result = find_matches.match_status(i, j, matches, para_words, rp)
         self.assertEqual(result, True)
+
+
+
+    def test_match_status2(self):
+        #  Checks that no match -> not True
+        i = 0
+        j = 1
+        matches = []
+        para_words = ['the', 'end']
+        rp = 'fuck me'
+
+        result = find_matches.match_status(i, j, matches, para_words, rp)
+        self.assertNotEqual(result, True)
 
 
 #    def test_longest_match1(self):

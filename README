@@ -13,6 +13,6 @@ THIS VERSION
 
 I am changing the flow so that it processes paragraph objects. This way I can create an output document that looks quite like the original. See save_by_para.py for the paragraph process in shell form.
 
-I am finding matches using regex, and saving the results with regex, too. This means that double spaces, captial letters and punctuation in the original essay can be preserved when printing the results. It also allows the possibility of skipping words that the student has added. See regex.py for progress in this.
+I am finding matches using regex, and saving the results with regex, too. This means that double spaces, captial letters and punctuation in the original essay can be preserved when printing the results. It also allows the possibility of skipping words that the student has added. See regex.py for progress in this. One result of this is that the 'matches' list can now be a list of regex objects, making saving easier.
 
 The basic functioning will be the same, but now the sa text will consist of only one paragraph of the essay at a time.

@@ -18,13 +18,14 @@ def main():
 def set_up():
     '''creates sa and rp object for testing purposes only'''
     sa = 'The cat, Tom, sat on the mat.'
-    matches = ['sat on the', 'the cat']
+    matches = ['sat on the', 'the cat', 'cat tom']
     return (sa, matches)
 
 
 def define_link():
     '''Defines the regex to be used for joining search terms'''
-    link = r'\s'
+#    link = r'[\,\s]+'
+    link = r'[\W]+'
     return link
 
 def find_run(sa, matches, link):
