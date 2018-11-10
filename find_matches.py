@@ -18,8 +18,12 @@ def find_matches(rp, para_words):
     while i < len(para_words):
         match = longest_match(i, para_words, rp)
         matches.append(match)
-        print(match)
         i += 1
+    for match in matches:
+        if type(match) != None:
+            srch = match.search(rp)
+            text = srch.group()
+            print(text)
 
 
 def longest_match(i, para_words, rp):
@@ -33,10 +37,15 @@ def longest_match(i, para_words, rp):
     #  Sentinel test: Is regex in rp?
     expr = complie_regex(i, j, para_words)
     search_result = expr.search(rp)
+    match = expr  # To return if no more matches found in loop.
     if search_result != None:
         while i + j < len(para_words):
             j += 1
-            print('This works! i = {}'.format(i))  #  Test
+            expr = complie_regex(i, j, para_words)
+            match = expr
+            search_result = expr.search(rp)
+            if search_result != None:
+                break
     return match
 
 

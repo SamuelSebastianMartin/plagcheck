@@ -8,6 +8,16 @@ import logging
 
 logging.basicConfig(level=logging.CRITICAL)
 
+
+def filepicker():
+    import tkinter as tk
+    from tkinter import filedialog
+
+    root = tk.Tk()
+    root.withdraw()
+
+    file_path = filedialog.askopenfilename()
+
 def open_text(textname):
     doc = docx.Document(textname)  # Create a Document object.
     logging.debug("Num of paras - {}".format(len(doc.paragraphs)))
