@@ -4,8 +4,14 @@ To-do list for plagcheck.py
 FUNCTION
 
 Incorporate a sensitivity level.
-Return a copy of the original essay with highlighted results.
 remove sources from prepared text. This could be remove all '(....... \d\d\d\d)', or 'Camel Case (\d\d\d\d)'
+adapt file_picker()  to GUI.
+continue reworking of find_matches()
+adapt get_texts() to return the new required objects.
+adapt get_texts() to work with new output from filepicker.
+encase all in a docx-in docx-out loop. See save_by_para.py.
+encase all in a loop-though-several-essays loop.
+
 
 USEABILITY
 

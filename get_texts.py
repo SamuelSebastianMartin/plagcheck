@@ -4,9 +4,7 @@
 
 
 import docx
-import logging
 
-logging.basicConfig(level=logging.CRITICAL)
 
 
 def filepicker():
@@ -17,36 +15,25 @@ def filepicker():
     root.withdraw()
 
     file_path = filedialog.askopenfilename()
+    return file_path
 
-def open_text(textname):
-    doc = docx.Document(textname)  # Create a Document object.
-    logging.debug("Num of paras - {}".format(len(doc.paragraphs)))
-    # Join docx.paragraphs into single text
-    doctext = [para.text for para in doc.paragraphs]
-    document = ''.join(doctext)
-    logging.debug("whole text - {}".format(document))
-    return document
+def open_text(file_path):
+    doc_object = docx.Document(file_path)  # Create a Document object.
+    return doc_object
 
 
 def prepare_text(text):
     '''String -> list - lowercase without punctuation.'''
     import string
-#    text = text.lower()
-#    text = "".join((char for char in text if char not in string.punctuation))
-    text = text.split()
-    return text
+    text = text.lower()
+    text = "".join((char for char in text if char not in string.punctuation))
+    para_words = text.split()
+    return para_words
 
 
-def get_texts(texts):
-    """This function and sub-functions opens and prepares the two texts,
-    returning clean texts, a list of unique words, and the original essay"""
-#    texts = get_text_names()
-    reading_pack = open_text(texts[0])
-    original_essay = open_text(texts[1])
-    rp = prepare_text(reading_pack)
-    sa = prepare_text(original_essay)
-    sa.append('#23!@23Ap9$')  # Unmatchable final value on sa
-    return rp, sa, original_essay
+def get_texts():
+    '''Function name is a deletable legacy of previous versions'''
+    pass
 
 
 if __name__ == '__main__':

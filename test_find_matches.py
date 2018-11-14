@@ -42,7 +42,7 @@ class TestAdd(unittest.TestCase):
         para_words = ['the', 'end']
         rp = 'the end'
 
-        result = find_matches.match_status(i, j, matches, para_words, rp)
+        result = find_matches.match_status(i, j, para_words, rp)
         self.assertEqual(result, True)
 
 
@@ -55,7 +55,7 @@ class TestAdd(unittest.TestCase):
         para_words = ['the', 'end']
         rp = 'fuck me'
 
-        result = find_matches.match_status(i, j, matches, para_words, rp)
+        result = find_matches.match_status(i, j, para_words, rp)
         self.assertNotEqual(result, True)
 
 

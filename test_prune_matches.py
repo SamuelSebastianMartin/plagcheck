@@ -29,6 +29,7 @@ class TestAdd(unittest.TestCase):
         self.assertEqual(result, answer)
 
     def test_remove_overlaps2(self):
+        # When one match encroaches on another, preserve the second.
         data = [(2, 4), (3, 4), (3, 6), (4, 6), (5, 6), (6, 6)]
         answer = [(2, 4), (3, 6)]
         result = prune_matches.remove_overlaps(data)
