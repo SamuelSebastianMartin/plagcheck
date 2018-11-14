@@ -20,7 +20,7 @@ def find_matches(rp, para_words):
         matches.append(match)
         i += 1
     for match in matches:
-        if type(match) != None:
+        if type(match) is not None:
             srch = match.search(rp)
             text = srch.group()
             print(text)
@@ -38,13 +38,13 @@ def longest_match(i, para_words, rp):
     expr = complie_regex(i, j, para_words)
     search_result = expr.search(rp)
     match = expr  # To return if no more matches found in loop.
-    if search_result != None:
+    if search_result is not None:
         while i + j < len(para_words):
             j += 1
             expr = complie_regex(i, j, para_words)
             match = expr
             search_result = expr.search(rp)
-            if search_result != None:
+            if search_result is not None:
                 break
     return match
 
@@ -55,7 +55,7 @@ def match_status(i, j, para_words, rp):
     sentinel test before loops and conditionals.'''
     expr = complie_regex(i, j, para_words)
     search_result = expr.search(rp)
-    if search_result != None:
+    if search_result is not None:
         return True
 
 
@@ -68,6 +68,7 @@ def complie_regex(i, j, para_words):
 
 def main():
     find_matches(rp, para_words)
+
 
 if __name__ == '__main__':
     main()

@@ -7,6 +7,7 @@ So the pattern 'cat sat' should match ['cat sat', 'Cat, sat', 'cat was sat']
 '''
 import re
 
+
 def main():
     sa, matches = set_up()
     link = define_link()
@@ -28,6 +29,7 @@ def define_link():
     link = r'[\W]+'
     return link
 
+
 def find_run(sa, matches, link):
     '''This is were the testing really happens'''
     runs = []
@@ -41,6 +43,7 @@ def find_run(sa, matches, link):
 
         runs.append(run)
     return runs
+
 
 if __name__ == '__main__':
     main()

@@ -2,6 +2,7 @@
 
 from operator import itemgetter  # To sort tuples by 2nd number.
 
+
 def prune_indices(matches):
     '''Input is a list of tuples, each containing the start and end point
     of a match in the essay (sa). This module sorts these tuples by the
@@ -35,6 +36,5 @@ def remove_overlaps(ordered_matches):
             ordered_matches.remove(ordered_matches[i])
         else:
             i += 1
-
 
     return ordered_matches

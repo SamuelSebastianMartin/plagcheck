@@ -17,42 +17,15 @@ import find_matches
 
 
 def main():
-    level = welcome()
-    textnames = get_text_names()
-    rp, sa, original_essay = get_texts.get_texts(textnames)
-    duplicates = find_matches.find_matches(rp, sa)
-    shortlist = filter(duplicates)
-    results(shortlist, original_essay)
+    rp_doc, rp = get_texts.get_texts()
+    sa_doc, sa = get_texts.get_texts()
+    para_words = get_texts.prepare_text(sa)
 
-
-def welcome():
-    print("""
-        PLAGIARISM CHECKER
-
-
-        This program finds snippets of text in an essay which have
-        been copied from the reading pack.
-        """)
-
-
-def get_text_names():
-    import filepicker  # My own module. Must be in the same directory.
-    reading_pack = filepicker.filepicker('reading pack')  # User input.
-    essay = filepicker.filepicker('essay')  # User input.
-    texts = [reading_pack, essay]
-    return texts
-
-
-def filter(duplicates):
-    '''Filters the results'''
-    critical = 3  # Minimum number of plag words to check for.
-    shortlist = [phrs for phrs in duplicates if len(phrs) >= critical]
-    return shortlist
-
-
-def results(shortlist, original_essay):
-    for result in shortlist:
-        print(' '.join(result))
+    for para in sa_doc.paragraphs:
+        text = para.text
+        para_words = get_texts.prepare_text(text)
+        print(para_words)
+        print()
 
 
 if __name__ == '__main__':

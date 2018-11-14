@@ -9,8 +9,10 @@ import os
 import get_texts
 import shutil
 
+
 def fake_results():
-    original_essay = 'this is the good text. This, however, is the plagerised text - to be highlighted. This is good text.'
+    original_essay = 'this is the good text. This, however, is the plagerised
+    text - to be highlighted. This is good text.'
     shortlist = ['This, however, is', 'plagerised text - to be highlighted.']
     return(original_essay, shortlist)
 
@@ -30,6 +32,7 @@ def main():
     results(shortlist, original_essay)
     os.system('libreoffice out_document.docx')
     os.system('rm out_document.docx')
+
 
 if __name__ == '__main__':
     main()
