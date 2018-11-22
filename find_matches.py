@@ -3,7 +3,7 @@
 import re
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.CRITICAL)
 
 #  Data for testing only.
 para_words = ['the', 'end', 'of', 'as', 'we', 'know']
@@ -11,11 +11,14 @@ rp = '(The, end. as we know it'
 match = ''
 #  End test data.
 
+logging.debug("para_words: {}".format(para_words))
+logging.debug("        rp: {}".format(rp))
 
 def find_matches(rp, para_words):
-    matches = []  # _SRE_Pattern objects. Must 'search' & 'group'.
+    matches = []  # Sequence of _SRE_Pattern objects. Must 'search' & 'group'.
     i = 0
     while i < len(para_words):
+        logging.debug("New loop. i = {}".format(i))
         match = longest_match(i, para_words, rp)
         matches.append(match)
         i += 1
@@ -31,21 +34,15 @@ def longest_match(i, para_words, rp):
     Starting from the word at index [i], it
     keeps adding words from the para_words list
     until the longest match is found with the rp.
+    Returns a regex expression.
     '''
-    j = 1  # Later this could be a 'sensitivity-level' cut-off.
-
-    #  Sentinel test: Is regex in rp?
-    expr = complie_regex(i, j, para_words)
-    search_result = expr.search(rp)
-    match = expr  # To return if no more matches found in loop.
-    if search_result is not None:
-        while i + j < len(para_words):
-            j += 1
-            expr = complie_regex(i, j, para_words)
-            match = expr
-            search_result = expr.search(rp)
-            if search_result is not None:
-                break
+    for j in range (len(para_words)-i):  # ie. remainder of list.
+        logging.debug('<longest_match> {}-word: {}'.format(j, para_words[i: i+j]))
+        expr = complie_regex(i, i+j, para_words)
+        match = expr
+        search_result = expr.search(rp)
+        if search_result is None:
+            break
     return match
 
 
@@ -63,12 +60,14 @@ def complie_regex(i, j, para_words):
     '''produces the regex search to be check against the rp'''
     str = r'\W+'.join(para_words[i: i+j])
     expr = re.compile(str, re.IGNORECASE)
+    print('<compile_regex> returns {}'.format(expr))
     return expr
 
 
 def main():
-    find_matches(rp, para_words)
+    pass
+#    find_matches(rp, para_words)
 
 
 if __name__ == '__main__':
-    main()
+    find_matches(rp, para_words)
