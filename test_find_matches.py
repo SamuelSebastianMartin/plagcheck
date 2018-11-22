@@ -18,7 +18,7 @@ class TestAdd(unittest.TestCase):
         i = 0
         j = 2
 
-        expr = find_matches.complie_regex(i, j, self.para_words)
+        expr = find_matches.compile_regex(i, j, self.para_words)
         mo = expr.search(self.rp)
         result = mo.group()
         self.assertEqual(result, 'The, end')
@@ -28,7 +28,7 @@ class TestAdd(unittest.TestCase):
         i = 4
         j = 2
 
-        expr = find_matches.complie_regex(i, j, self.para_words)
+        expr = find_matches.compile_regex(i, j, self.para_words)
         mo = expr.search(self.rp)
         result = mo.group()
         self.assertEqual(result, 'we know')
@@ -39,7 +39,7 @@ class TestAdd(unittest.TestCase):
         j = 2
         self.rp = '(The, end. as we know'
 
-        expr = find_matches.complie_regex(i, j, self.para_words)
+        expr = find_matches.compile_regex(i, j, self.para_words)
         mo = expr.search(self.rp)
         result = mo.group()
         self.assertEqual(result, 'we know')

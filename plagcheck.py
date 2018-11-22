@@ -24,8 +24,8 @@ def main():
     for para in sa_doc.paragraphs:
         text = para.text
         para_words = get_texts.prepare_text(text)
-        print(para_words)
-        print()
+
+        find_matches.find_matches(rp, para_words)
 
 
 if __name__ == '__main__':
