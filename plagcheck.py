@@ -25,7 +25,8 @@ def main():
         text = para.text
         para_words = get_texts.prepare_text(text)
 
-        find_matches.find_matches(rp, para_words)
+        matches = find_matches.find_matches(rp, para_words)
+        print('\n\n', matches)#
 
 
 if __name__ == '__main__':

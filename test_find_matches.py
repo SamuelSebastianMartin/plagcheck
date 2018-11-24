@@ -8,7 +8,7 @@ import find_matches
 class TestAdd(unittest.TestCase):
 
     def setUp(self):
-        self.para_words = ['the', 'end', 'of', 'as', 'we', 'know']
+        self.para_words = ['the', 'end', 'of', 'as', 'we', 'know', '_dummy_']
         self.rp = '(The, end. as we know it'
         self.matches = []
 
@@ -44,36 +44,22 @@ class TestAdd(unittest.TestCase):
         result = mo.group()
         self.assertEqual(result, 'we know')
 
-    def test_match_status1(self):
-        #  Checks that match -> True
-        i = 0
-        j = 1
-        self.para_words = ['the', 'end']
-        self.rp = 'the end'
-
-        result = find_matches.match_status(i, j, self.para_words, self.rp)
-        self.assertEqual(result, True)
-
-    def test_match_status2(self):
-        #  Checks that no match -> not True
-        i = 0
-        j = 1
-        self.matches = []
-        self.para_words = ['the', 'end']
-        self.rp = 'fuck me'
-
-        result = find_matches.match_status(i, j, self.para_words, self.rp)
-        self.assertNotEqual(result, True)
-
     def test_longest_match1(self):
         #  finds onl matches from index i, not [0]
         i = 4
 
-        match = find_matches.longest_match(i, self.para_words, self.rp)
-        mo = match.search(self.rp)
-        result = mo.group()
-        self.assertEqual(result, 'we know')
+        result = find_matches.longest_match(i, self.para_words, self.rp)
+        answer = re.compile('we\\W+know', re.IGNORECASE)
+        self.assertEqual(result, answer)
 
+    def test_filter_empties(self):
+        matches =  [re.compile('', re.IGNORECASE), None, None, None]
+        answer = []
+        result = find_matches.filter_empties(matches)
+        self.assertEqual(result, answer)
+
+    def test_find_matches(self):
+        pass
 
 if __name__ == '__main__':
     unittest.main()
