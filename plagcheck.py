@@ -19,11 +19,16 @@ import find_matches
 def main():
     rp_doc, rp = get_texts.get_texts()
     sa_doc, sa = get_texts.get_texts()
-    para_words = get_texts.prepare_text(sa)
+#    para_words = get_texts.prepare_text(sa)
+#    para_words.append('_dummy_final_word_')
 
     for para in sa_doc.paragraphs:
         text = para.text
+        print('Text = ', text)#
         para_words = get_texts.prepare_text(text)
+        para_words.append('_dummy_final_word_')
+        para_words.insert(0, '_dummy_first_word_')
+        print('Words= ', para_words)#
 
         matches = find_matches.find_matches(rp, para_words)
         print('\n\n', matches)#

@@ -11,24 +11,25 @@ rp = 'One, two (three) five. Six!'
 match = ''
 #  End test data.
 
-print("para_words: {}".format(para_words))#
-print("        rp: {}\n".format(rp))#
+#print("para_words: {}".format(para_words))#
+#print("        rp: {}\n".format(rp))#
 
 
 def find_matches(rp, para_words):
     matches = []  # _SRE_Pattern objects.
     i = 0
     while i < len(para_words):
-        print("\nNew loop. i = ", i)#
+        #print("\nNew loop. i = ", i)#
         match = longest_match(i, para_words, rp)
         matches.append(match)
-        print('>>>', match, 'appended to ', matches)#
+        #print('>>>', match, 'appended to ', matches)#
         i += 1
-    print('matches = ', matches)#
+    #print('matches = ', matches)#
     matches = filter_empties(matches)
     for match in matches:
-        print(match)#
+        #print(match)#
         match.search(rp)
+    #print(matches)#
     return matches
 
 
@@ -37,7 +38,7 @@ def filter_empties(matches):
     For some reason, it leaves one 'None' behind, so must run twice!?!'''
     real_matches = []
     for match in matches:
-        print('index =', matches.index(match), 'noneLoop =', match)#
+        #print('index =', matches.index(match), 'noneLoop =', match)#
         if match != None:
             real_matches.append(match)
         else:
@@ -48,7 +49,7 @@ def filter_empties(matches):
     for match in real_matches:
         if match != empty:
             non_empty.append(match)
-    print(non_empty)#
+    #print(non_empty)#
     return non_empty
 
 
@@ -60,13 +61,13 @@ def longest_match(i, para_words, rp):
     '''
     match = compile_regex(0, 0, [''])  # To declare 'match'
     for j in range (1, len(para_words) ):  # ie. remainder of list.
-        print('i = ', i, 'j = ', j)#
+        #print('i = ', i, 'j = ', j)#
         expr = compile_regex(i, j, para_words)
 
-        print('compile received = ', expr)#
+        #print('compile received = ', expr)#
         search_result = expr.findall(rp)
         if search_result == []:
-            print('returning match: ', match)
+            #print('returning match: ', match)
             return match
         match = expr
 
@@ -75,7 +76,7 @@ def compile_regex(i, j, para_words):
     '''produces the regex search to be check against the rp'''
     str = r'\W+'.join(para_words[i: i+j])
     expr = re.compile(str, re.IGNORECASE)
-    print('<compile_regex> returns ', expr)#
+    #print('<compile_regex> returns ', expr)#
     return expr
 
 
