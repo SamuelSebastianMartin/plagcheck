@@ -65,9 +65,18 @@ def find_in_sa(matches, sa):
 
 def write_para(out_doc, sa, indices):
     p = out_doc.add_paragraph()
+
+    i = 0
+    j = 0
     for span in indices:
-        plag_text = sa[span[0]: span[1]]
-        p.add_run(plag_text).bold = True
+        j = span[0] - 1  # End of unplagiarised section.
+        p.add_run(sa[i: j])
+        p.add_run(sa[span[0]: span[1]]).bold = True
+        if span[1] < len(sa):
+            i = span[1] + 1
+
+    p.add_run(sa[i: -1])  # Tail end of good text.
+
     return out_doc
 
 
