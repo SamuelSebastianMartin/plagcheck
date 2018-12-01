@@ -3,18 +3,22 @@ To-do list for plagcheck.py
 
 FUNCTION
 
+Find cause of unittest fail of prune_matches(). It is so small!
+Build the find_in_essay(), returning positional tuples to pass to prune_matches().
+Build the add_paragraph(), taking output from prune_matches().
+Add second level of find_in_essay(), replacing all \\W+ with \\W+w? to allow inserted words. This would have to integrate with both prune_matches() and add_paragraph().
 Incorporate a sensitivity level.
 remove sources from prepared text. This could be remove all '(....... \d\d\d\d)', or 'Camel Case (\d\d\d\d)'
-adapt file_picker()  to GUI.
-continue reworking of find_matches()
-adapt get_texts() to return the new required objects.
-adapt get_texts() to work with new output from filepicker.
+adapt file_picker()  to GUI.  # DONE
+continue reworking of find_matches()  # DONE
+adapt get_texts() to return the new required objects.  # DONE
+adapt get_texts() to work with new output from filepicker.  # DONE
 encase all in a docx-in docx-out loop. See save_by_para.py.
 encase all in a loop-though-several-essays loop.
 
 
 USEABILITY
 
-Improve filepicker to point-and-click GUI.
+Improve filepicker to point-and-click GUI.  # DONE
 Process multiple essays.
 Package for colleagues to use on MS Windows.

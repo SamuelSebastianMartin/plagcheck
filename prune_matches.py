@@ -11,7 +11,8 @@ def prune_indices(matches):
     but in numbers, of course: [(1, 2), (2, 2)] becomes [(1, 2)].
     '''
     ordered_matches = sort_second(matches)
-    indices = remove_overlaps(ordered_matches)
+    indices_tmp = remove_overlaps(ordered_matches)
+    indices = remove_nesting(indices_tmp)
 
     return indices
 
@@ -21,6 +22,7 @@ def sort_second(matches):
     [(1, 2), (2, 1)] -> [(2, 1), (1, 2)].'''
     matches.sort(key=itemgetter(1))
 
+    print('sorted matches :', matches)
     return matches
 
 
@@ -37,4 +39,21 @@ def remove_overlaps(ordered_matches):
         else:
             i += 1
 
+    print('ordered_matches :', ordered_matches)#
     return ordered_matches
+
+
+def remove_nesting(items):
+    # FAIL
+    ''' [(1, 3), (0, 4)] -> [(0, 4)]
+    After sort_second(), a span may be fully comprehended in the
+    span to its right. This will remove such nested spans'''
+    unnested = items.copy()
+    for i in range(len(items)):
+        print(items[i-1][0], items[i][0])
+        if items[i-1][0] > items[i][0]:  # Only check first tuple value.
+            unnested.remove(items[i-1])
+    print('unnested :', unnested)#
+    return unnested
+
+

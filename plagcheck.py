@@ -14,24 +14,44 @@
 
 import get_texts
 import find_matches
+import prune_matches
 
 
 def main():
     rp_doc, rp = get_texts.get_texts()
     sa_doc, sa = get_texts.get_texts()
-#    para_words = get_texts.prepare_text(sa)
-#    para_words.append('_dummy_final_word_')
 
     for para in sa_doc.paragraphs:
-        text = para.text
-        print('Text = ', text)#
-        para_words = get_texts.prepare_text(text)
-        para_words.append('_dummy_final_word_')
-        para_words.insert(0, '_dummy_first_word_')
-        print('Words= ', para_words)#
+        matches = find_in_rp(rp, para)
+        #print('\n\n', matches)#
 
-        matches = find_matches.find_matches(rp, para_words)
-        print('\n\n', matches)#
+        sa_indices = find_in_sa(matches, sa)
+        #print(sa_indices)#
+        indices = prune_matches.prune_indices(sa_indices)
+        #print(indices)#
+
+
+def find_in_rp(rp, para):
+    text = para.text
+    #print('Text = ', text)#
+    para_words = get_texts.prepare_text(text)
+    para_words.append('_dummy_final_word_')
+    para_words.insert(0, '_dummy_first_word_')
+    #print('Words= ', para_words)#
+
+    matches = find_matches.find_matches(rp, para_words)
+    return matches
+
+def find_in_sa(matches, sa):
+    spans = []
+    n = 0  # Start point for search.
+    for match in matches:
+        srch = match.search(sa, pos=n)
+        span = srch.span()
+        n = span[0]  # To not research the same text. Matches are in order.
+        spans.append(span)
+
+    return spans
 
 
 if __name__ == '__main__':

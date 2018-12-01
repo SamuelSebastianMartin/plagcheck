@@ -2,6 +2,7 @@
 
 import unittest
 import prune_matches
+import os
 
 
 class TestAdd(unittest.TestCase):
@@ -33,6 +34,26 @@ class TestAdd(unittest.TestCase):
         result = prune_matches.remove_overlaps(data)
         self.assertEqual(result, answer)
 
+    def test_remove_nesting1(self):
+        # Half nested overlap
+        data = [(2, 3), (2, 8)]
+        answer = [(2, 8)]
+        result = prune_matches.remove_nesting(data)
+        self.assertEqual(result, answer)
+
+    def test_remove_nesting2(self):
+        # When frist span is contained within second span - removes the first.
+        data = [(1, 2), (0, 3)]
+        answer = [(0, 3)]
+        result = prune_matches.remove_nesting(data)
+        self.assertEqual(result, answer)
+
+    def test_remove_nesting3(self):
+        # Multiple concentric nesting.
+        data = [(2, 3), (1, 4), (0, 5)]
+        answer = [(0, 5)]
+        result = prune_matches.remove_nesting(data)
+        self.assertEqual(result, answer)
 
 if __name__ == '__main__':
     unittest(main)
