@@ -45,7 +45,7 @@ def get_texts():
     file_path = filepicker()
     doc_object = open_text(file_path)
     text = doctotext(doc_object)
-    return doc_object, text
+    return doc_object, text, file_path
 
 
 if __name__ == '__main__':

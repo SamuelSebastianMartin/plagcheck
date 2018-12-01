@@ -15,11 +15,16 @@
 import get_texts
 import find_matches
 import prune_matches
+import docx
+import os
 
 
 def main():
-    rp_doc, rp = get_texts.get_texts()
-    sa_doc, sa = get_texts.get_texts()
+    rp_doc, rp, rp_path = get_texts.get_texts()
+    sa_doc, sa, sa_path = get_texts.get_texts()
+
+    #  Create final out document.
+    out_doc = docx.Document()
 
     for para in sa_doc.paragraphs:
         matches = find_in_rp(rp, para)
@@ -29,6 +34,11 @@ def main():
         #print(sa_indices)#
         indices = prune_matches.prune_indices(sa_indices)
         #print(indices)#
+
+        out_doc = write_para(out_doc, sa, indices)
+
+    out_doc.save('OUT.docx')
+    os.system('libreoffice OUT.docx')
 
 
 def find_in_rp(rp, para):
@@ -53,6 +63,15 @@ def find_in_sa(matches, sa):
 
     return spans
 
+def write_para(out_doc, sa, indices):
+    p = out_doc.add_paragraph()
+    for span in indices:
+        plag_text = sa[span[0]: span[1]]
+        p.add_run(plag_text).bold = True
+    return out_doc
+
+
+    pass
 
 if __name__ == '__main__':
     main()
