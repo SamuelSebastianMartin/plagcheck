@@ -22,3 +22,17 @@ USEABILITY
 Improve filepicker to point-and-click GUI.  # DONE
 Process multiple essays.
 Package for colleagues to use on MS Windows.
+
+PROBLEMS
+
+repeated words as in "although thethe argument"
+  Possible solutions:
+    1. when the span is only one word, it can be found anywhere in the essay, so a 'sensitivity=3words' clause would help.
+    2. find_in_sa() should have a start (and end?) position for re.search().
+
+Letters within longer words are underlined: e.g. 'to' in 'accustomed'. Solution as above.
+
+References are highlighted (smaller problem)
+  Solutions:
+    1. Have a re.group within find_in_sa(), which compares with a regex from of a citation and rejects matches. This could also be used for bibliographies and runs like 'in the same' or 'it would seem that'. The senstivity/number of words could be checked here too.
+    2. Strip sa of references and bibliography before making para_words list. This would deal with bibliographies and title pages, too, but not empy phrases ('it would seem that' etc) or number of words.

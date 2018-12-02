@@ -1,16 +1,13 @@
 #!/usr/bin/env python3
 
-# Must be in same folder as the essay, reading_pack and
-# filepicker.py (my own module)
-#
-# to check for plagiarism between 2 documents:
 #              reading_pack.txt and essay.txt
 
-"""The main engine is the find_matches() function:
-    for each unique word in essay:
-        for each occurance of word in essay:
-            for each occurance of word in reading pack:
-                check for matches in texts.    """
+"""
+This finds text in an essay.docx, which has bee copied from reading-pack.docx.
+You will be asked to select, first a reading-pack document, then the essay.
+The essay is processed by paragraph for matches.
+Output is a new MS Word document with copied text in bold type.
+"""
 
 import get_texts
 import find_matches
@@ -26,16 +23,12 @@ def main():
     #  Create final out document.
     out_doc = docx.Document()
 
+    #  Loop through paragraphs, finding index of plagiarised text.
     for para in sa_doc.paragraphs:
         matches = find_in_rp(rp, para)
-        #print('\n\n', matches)#
-
-        sa_indices = find_in_sa(matches, sa)
-        #print(sa_indices)#
+        sa_indices = find_in_sa(matches, para.text)
         indices = prune_matches.prune_indices(sa_indices)
-        #print(indices)#
-
-        out_doc = write_para(out_doc, sa, indices)
+        out_doc = write_para(out_doc, para.text, indices)
 
     out_doc.save('OUT.docx')
     os.system('libreoffice OUT.docx')
@@ -43,11 +36,9 @@ def main():
 
 def find_in_rp(rp, para):
     text = para.text
-    #print('Text = ', text)#
     para_words = get_texts.prepare_text(text)
     para_words.append('_dummy_final_word_')
     para_words.insert(0, '_dummy_first_word_')
-    #print('Words= ', para_words)#
 
     matches = find_matches.find_matches(rp, para_words)
     return matches
@@ -57,25 +48,26 @@ def find_in_sa(matches, sa):
     n = 0  # Start point for search.
     for match in matches:
         srch = match.search(sa, pos=n)
-        span = srch.span()
-        n = span[0]  # To not research the same text. Matches are in order.
-        spans.append(span)
+        if srch != None:
+            span = srch.span()
+            n = span[0]  # To not re-search the same text. Matches are in order.
+            spans.append(span)
 
     return spans
 
-def write_para(out_doc, sa, indices):
+def write_para(out_doc, text, indices):
     p = out_doc.add_paragraph()
 
     i = 0
     j = 0
     for span in indices:
-        j = span[0] - 1  # End of unplagiarised section.
-        p.add_run(sa[i: j])
-        p.add_run(sa[span[0]: span[1]]).bold = True
-        if span[1] < len(sa):
-            i = span[1] + 1
+        j = span[0]  # End of unplagiarised section.
+        p.add_run(text[i: j])
+        p.add_run(text[span[0]: span[1]]).underline = True
+        if span[1] < len(text):
+            i = span[1]
 
-    p.add_run(sa[i: -1])  # Tail end of good text.
+    p.add_run(text[i: len(text)])  # Tail end of good text.
 
     return out_doc
 
