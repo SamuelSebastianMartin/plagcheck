@@ -50,7 +50,7 @@ def find_in_sa(matches, sa):
         srch = match.search(sa, pos=n)
         if srch != None:
             span = srch.span()
-            n = span[0]  # To not re-search the same text. Matches are in order.
+            n = span[0] +1  # To not re-search the same text. Matches are in order.
             spans.append(span)
 
     return spans

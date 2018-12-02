@@ -20,19 +20,38 @@ class TestAdd(unittest.TestCase):
         result = prune_matches.sort_second(data)
         self.assertEqual(result, answer)
 
-    def test_remove_overlaps1(self):
+    def test_remove_subsets1(self):
         # (1, 2), 2, 2) -> (1, 2)
         data = [(1, 3), (2, 3), (3, 3)]
         answer = [(1, 3)]
-        result = prune_matches.remove_overlaps(data)
+        result = prune_matches.remove_subsets(data)
         self.assertEqual(result, answer)
 
-    def test_remove_overlaps2(self):
+    def test_remove_subsets2(self):
         # When one match encroaches on another, preserve the second.
         data = [(2, 4), (3, 4), (3, 6), (4, 6), (5, 6), (6, 6)]
         answer = [(2, 4), (3, 6)]
-        result = prune_matches.remove_overlaps(data)
+        result = prune_matches.remove_subsets(data)
         self.assertEqual(result, answer)
+
+    def test_split_overlaps(self):
+        data = [(1, 7), (6, 9)]
+        answer = [(1, 7), (8, 9)]
+        result = prune_matches.split_overlaps(data)
+        self.assertEqual(result, answer)
+
+    def test_yield_longest1(self):
+        big = (1, 7)
+        small = (6, 9)
+        first, second = prune_matches.yield_longest(big, small)
+        self.assertEqual(first, (1, 7))
+        self.assertEqual(second, (8, 9))
+
+    def test_yield_longest2(self):
+        big = (1, 7)
+        small = (6, 8)
+        first, second = prune_matches.yield_longest(big, small)
+        self.assertEqual(second, (8, 8))
 
     def test_remove_nesting1(self):
         # Half nested overlap

@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.DEBUG)
 #  Data for testing only.
 para_words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', '_dummy_']
 rp = 'One, two (three) five. Six!'
-match = ''
+
 #  End test data.
 
 #print("para_words: {}".format(para_words))#
@@ -60,7 +60,8 @@ def longest_match(i, para_words, rp):
     Returns a regex expression.
     '''
     match = compile_regex(0, 0, [''])  # To declare 'match'
-    for j in range (1, len(para_words) ):  # ie. remainder of list.
+    minwds = 3  # Minimum number of words to check. Define as kwarg?
+    for j in range (minwds, len(para_words) ):  # ie. remainder of list.
         #print('i = ', i, 'j = ', j)#
         expr = compile_regex(i, j, para_words)
 
