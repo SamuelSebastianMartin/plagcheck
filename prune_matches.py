@@ -69,13 +69,14 @@ def yield_longest(first, second):
 
 def remove_nesting(items):
     # FAIL
-    ''' [(1, 3), (0, 4)] -> [(0, 4)]
+    ''' [(1, 3), (0, 4)] -> [(0, 4)] and
+        [(0, 3), (0, 4)] -> [(0, 4)]
     After sort_second(), a span may be fully comprehended in the
     span to its right. This will remove such nested spans'''
     unnested = items.copy()
     for i in range(len(items)):
         print(items[i-1][0], items[i][0])
-        if items[i-1][0] >= items[i][0]:  # Only check first tuple value.
+        if items[i-1][1] < items[i][1] and items[i-1][0] >= items[i][0]:
             print('removing ', items[i-1])
             unnested.remove(items[i-1])
     print('unnested :', unnested)#
