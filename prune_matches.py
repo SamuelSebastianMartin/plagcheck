@@ -26,7 +26,6 @@ def sort_second(matches):
     matches.sort()                      # sort by tuple[0]
     matches.sort(key=itemgetter(1))     # sort by tuple[1]
 
-    print('sorted matches :', matches)#
     return matches
 
 
@@ -44,7 +43,6 @@ def remove_subsets(ordered_matches):
         else:
             i += 1
 
-    print('ordered_matches :', ordered_matches)#
     return ordered_matches
 
 def split_overlaps(spans):
@@ -75,9 +73,6 @@ def remove_nesting(items):
     span to its right. This will remove such nested spans'''
     unnested = items.copy()
     for i in range(len(items)):
-        print(items[i-1][0], items[i][0])
         if items[i-1][1] < items[i][1] and items[i-1][0] >= items[i][0]:
-            print('removing ', items[i-1])
             unnested.remove(items[i-1])
-    print('unnested :', unnested)#
     return unnested

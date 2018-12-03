@@ -3,18 +3,9 @@ To-do list for plagcheck.py
 
 FUNCTION
 
-Find cause of unittest fail of prune_matches(). It is so small!
-Build the find_in_essay(), returning positional tuples to pass to prune_matches().
-Build the add_paragraph(), taking output from prune_matches().
 Add second level of find_in_essay(), replacing all \\W+ with \\W+w? to allow inserted words. This would have to integrate with both prune_matches() and add_paragraph().
 Incorporate a sensitivity level.
 remove sources from prepared text. This could be remove all '(....... \d\d\d\d)', or 'Camel Case (\d\d\d\d)'
-adapt file_picker()  to GUI.  # DONE
-continue reworking of find_matches()  # DONE
-adapt get_texts() to return the new required objects.  # DONE
-adapt get_texts() to work with new output from filepicker.  # DONE
-encase all in a docx-in docx-out loop. See save_by_para.py.
-encase all in a loop-though-several-essays loop.
 
 
 USEABILITY
@@ -25,12 +16,11 @@ Package for colleagues to use on MS Windows.
 
 PROBLEMS
 
-repeated words as in "although thethe argument"
-  Possible solutions:
-    1. when the span is only one word, it can be found anywhere in the essay, so a 'sensitivity=3words' clause would help.
-    2. find_in_sa() should have a start (and end?) position for re.search().
+Still missing the first and last word of some quotations.
 
-Letters within longer words are underlined: e.g. 'to' in 'accustomed'. Solution as above.
+some words crash into eachother - check that this is not problem with the original essays being already corrected.
+
+Failing one test_find_matches
 
 References are highlighted (smaller problem)
   Solutions:

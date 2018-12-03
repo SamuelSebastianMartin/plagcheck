@@ -1,5 +1,19 @@
 #! /usr/bin/env/ python3
 
+# compare with  (10---------20)             Function call
+'''                 (12-18)                 remove_nesting()
+                (10---------20)             sort_second()
+                (10-12)                     remove_nesting()
+                        (18-20)             remove_subsets()
+             (8--10)                        split_overlaps()
+                           (20--22)         split_overlaps()
+             (8-----12)                     split_overlaps()
+                        (18-----22)         split_overlaps()
+             (8-------------20)             sort_second()
+                (10-------------22)         split_overlaps()
+         (5-------------------------25)     remove_nesting()
+         (5--8)                (22--25)     No pruning needed.
+'''
 import unittest
 import prune_matches
 import os
@@ -7,11 +21,78 @@ import os
 
 class TestAdd(unittest.TestCase):
 
-    def test_prune_indices(self):
+    def test_prune_indices1(self):
         data = [(34, 35), (35, 35), (2, 3), (3, 3)]
         answer = [(2, 3), (34, 35)]
         result = prune_matches.prune_indices(data)
         self.assertEqual(result, answer)
+
+    def test_prune_indices2(self):
+        data = [(10, 20),(12, 18)]
+        answer = [(10, 20)]
+        result = prune_matches.prune_indices(data)
+        self.assertEqual(result, answer)
+
+        data = [(10, 20),(10, 20)]
+        answer = [(10, 20)]
+        result = prune_matches.prune_indices(data)
+        self.assertEqual(result, answer)
+
+        data = [(10, 20),(10, 12)]
+        answer = [(10, 20)]
+        result = prune_matches.prune_indices(data)
+        self.assertEqual(result, answer)
+
+        data = [(10, 20),(18, 20)]
+        answer = [(10, 20)]
+        result = prune_matches.prune_indices(data)
+        self.assertEqual(result, answer)
+
+        data = [(10, 20),(8, 10)]
+        answer = [(8, 9), (10, 20)]
+        result = prune_matches.prune_indices(data)
+        self.assertEqual(result, answer)
+
+        data = [(10, 20),(20, 22)]
+        answer = [(10, 20),(21, 22)]
+        result = prune_matches.prune_indices(data)
+        self.assertEqual(result, answer)
+
+        data = [(10, 20),(8, 12)]
+        answer = [(8, 9), (10, 20)]
+        result = prune_matches.prune_indices(data)
+        self.assertEqual(result, answer)
+
+        data = [(10, 20),(18, 22)]
+        answer = [(10, 20),(21, 22)]
+        result = prune_matches.prune_indices(data)
+        self.assertEqual(result, answer)
+
+        data = [(10, 20),(8, 20)]
+        answer = [(8, 20)]
+        result = prune_matches.prune_indices(data)
+        self.assertEqual(result, answer)
+
+        data = [(10, 20),(10, 22)]
+        answer = [(10, 22)]
+        result = prune_matches.prune_indices(data)
+        self.assertEqual(result, answer)
+
+        data = [(10, 20),(5, 25)]
+        answer = [(5, 25)]
+        result = prune_matches.prune_indices(data)
+        self.assertEqual(result, answer)
+
+        data = [(10, 20),(5, 8)]
+        answer = [(5, 8), (10, 20)]
+        result = prune_matches.prune_indices(data)
+        self.assertEqual(result, answer)
+
+        data = [(10, 20),(22, 25)]
+        answer = [(10, 20),(22, 25)]
+        result = prune_matches.prune_indices(data)
+        self.assertEqual(result, answer)
+
 
     def test_sort_second(self):
         # Sorts list of tuples by second value.
