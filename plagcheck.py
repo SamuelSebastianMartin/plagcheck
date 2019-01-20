@@ -37,9 +37,6 @@ def main():
 def find_in_rp(rp, para):
     text = para.text
     para_words = get_texts.prepare_text(text)
-    para_words.append('_dummy_final_word_')
-    para_words.insert(0, '_dummy_first_word_')
-
     matches = find_matches.find_matches(rp, para_words)
     return matches
 
