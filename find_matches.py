@@ -14,16 +14,16 @@ def find_matches(rp, para_words):
     matches = []  # _SRE_Pattern objects.
     i = 0
     while i < len(para_words):
-        match = longest_match(i, para_words, rp)
+        match = longest_match(i, para_words, rp)  #c match is a regex, and will have to change to a span tuple.
         matches.append(match)
         i += 1
-    matches = filter_empties(matches)
-    for match in matches:
+    matches = filter_empties(matches)  #c Instances of 'None' will have to be managed some other way.
+    for match in matches:  #c Does this (and next) line do anything?
         match.search(rp)
-    return matches
+    return matches  #c Now a list of spans.
 
 
-def filter_empties(matches):
+def filter_empties(matches):  #c This will now be redundant, or work on 'None' within a list of span tuples.
     '''removes instances of 'None', which would crash in a 'search'.
     For some reason, it leaves one 'None' behind, so must run twice!?!'''
     real_matches = []
@@ -51,11 +51,11 @@ def longest_match(i, para_words, rp):
     minwds = 3  # Minimum number of words to check. Define as kwarg?
     for j in range (minwds, len(para_words) ):  # ie. remainder of list.
         expr = compile_regex(i, j, para_words)
-
+        #c Some span parallel to expr will have to be created here, and updated after return
         search_result = expr.findall(rp)
         if search_result == []:
-            return match
-        match = expr
+            return match  #c This must now return a span tuple.
+        match = expr  #c This will now be a span (see 4 lines up).
 
 
 def compile_regex(i, j, para_words):

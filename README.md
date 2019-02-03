@@ -1,4 +1,4 @@
-## Me learning Python
+## AIM OF PROJECT
 
 This program relates to my work, where students write an essay based on a series of academic texts given to them in a reading pack. 
 The program looks for words or phrases in the essay which are taken directly from the reading pack.

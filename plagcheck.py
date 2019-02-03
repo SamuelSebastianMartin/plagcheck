@@ -40,6 +40,7 @@ def find_in_rp(rp, para):
     matches = find_matches.find_matches(rp, para_words)
     return matches
 
+
 def find_in_sa(matches, sa):
     spans = []
     n = 0  # Start point for search.

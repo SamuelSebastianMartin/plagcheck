@@ -8,7 +8,7 @@ import find_matches
 class TestAdd(unittest.TestCase):
 
     def setUp(self):
-        self.para_words = ['the', 'end', 'of', 'as', 'we', 'know', '_dummy_']
+        self.para_words = ['the', 'end', 'of', 'as', 'we', 'know']
         self.rp = '(The, end. as we know it'
         self.matches = []
 
@@ -47,9 +47,9 @@ class TestAdd(unittest.TestCase):
     def test_longest_match1(self):
         #  finds onl matches from index i, not [0]
         i = 4
-
+        self.para_words = ['the', 'end', 'of', 'as', 'we', 'know', 'it']
         result = find_matches.longest_match(i, self.para_words, self.rp)
-        answer = re.compile('we\\W+know', re.IGNORECASE)
+        answer = re.compile(r'we\W+?know\W+?it', re.IGNORECASE)
         self.assertEqual(result, answer)
 
     def test_filter_empties(self):
