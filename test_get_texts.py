@@ -34,10 +34,10 @@ class TestAdd(unittest.TestCase):
         str_type = type('random string')
         self.assertEqual(result, str_type)
 
-    def test_prepare_text(self):
+    def test_text_to_wordlist(self):
         text = 'The. fiSH & chips!\n me@mail!!! (3): www.dog'
         out = ['the', 'fish', 'chips', 'memail', '3', 'wwwdog']
-        result = get_texts.prepare_text(text)
+        result = get_texts.text_to_wordlist(text)
         self.assertEqual(result, out)
 
     def tearDown(self):

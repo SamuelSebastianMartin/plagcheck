@@ -25,30 +25,40 @@ def main():
 
     #  Loop through paragraphs, finding index of plagiarised text.
     for para in sa_doc.paragraphs:
-        matches = find_in_rp(rp, para)
-        sa_indices = find_in_sa(matches, para.text)
-        indices = prune_matches.prune_indices(sa_indices)
-        out_doc = write_para(out_doc, para.text, indices)
+        text = para.text
+        para_words = get_texts.text_to_wordlist(text)
+
+        matches = find_matches.find_matches(rp, para_words)
+        print(matches)###
+        # Finds all plagiarised text, and returns list of 'para_words' spans
+
+        indices = prune_matches.prune_indices(matches)
+        print(indices)###
+        # Orders and sorts spans to avoid overlaps etc.
+
+        sa_indices = find_in_sa(text, matches, para_words)
+        print(sa_indices)###
+        # Turns 'para_words' list-spans into corresponding 'text' string-spans.
+
+        out_doc = write_para(out_doc, text, sa_indices)
 
     out_doc.save('OUT.docx')
     os.system('libreoffice OUT.docx')
 
 
-def find_in_rp(rp, para):
-    text = para.text
-    para_words = get_texts.prepare_text(text)
-    matches = find_matches.find_matches(rp, para_words)
-    return matches
-
-
-def find_in_sa(matches, sa):
+def find_in_sa(sa, matches, para_words):  ## Change to work with spans, not regex.
+    """
+    Takes the list-spans that tested positive in the reading pack, and finds
+    the corresponding text-spans in the essay text.
+    These text-spans are returned as a list.
+    """
     spans = []
     n = 0  # Start point for search.
     for match in matches:
-        srch = match.search(sa, pos=n)
-        if srch != None:
-            span = srch.span()
-            n = span[0] +1  # To not re-search the same text. Matches are in order.
+#        srch = match.search(sa, pos=n)
+#        if srch != None:
+#            span = srch.span()
+#            n = span[0] +1  ## can change to end of last span b.. already sorted?
             spans.append(span)
 
     return spans

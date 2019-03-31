@@ -45,17 +45,11 @@ class TestAdd(unittest.TestCase):
         self.assertEqual(result, 'we know')
 
     def test_longest_match1(self):
-        #  finds onl matches from index i, not [0]
+        #  finds only matches from index i, not [0]
         i = 4
         self.para_words = ['the', 'end', 'of', 'as', 'we', 'know', 'it']
         result = find_matches.longest_match(i, self.para_words, self.rp)
         answer = re.compile(r'we\W+?know\W+?it', re.IGNORECASE)
-        self.assertEqual(result, answer)
-
-    def test_filter_empties(self):
-        matches =  [re.compile('', re.IGNORECASE), None, None, None]
-        answer = []
-        result = find_matches.filter_empties(matches)
         self.assertEqual(result, answer)
 
     def test_find_matches(self):

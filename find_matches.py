@@ -6,61 +6,59 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 #  Data for testing only.
-para_words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', '_dummy_']
-rp = 'One, two (three) five. Six!'
+para_words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six']
+rp = 'one two three four five six'
 
+print(rp)###
+print(para_words)###
 
 def find_matches(rp, para_words):
-    matches = []  # _SRE_Pattern objects.
+    """
+    Runs through the list of para_words. For each word, it joins successive
+    words into a phrase, and checks to see if it matches any phrases in the rp.
+    For each match, the span of the match is saved (ie, the span in para_words.
+    It returns a list of spans, which will contain overlaps.
+    Non matches are recorded as a (0, 0) span.
+    """
+    matches = []  # Spans in para_words list.
     i = 0
     while i < len(para_words):
-        match = longest_match(i, para_words, rp)  #c match is a regex, and will have to change to a span tuple.
+        match = longest_match(i, para_words, rp)
         matches.append(match)
+        print(match)###
+        print(matches)###
         i += 1
-    matches = filter_empties(matches)  #c Instances of 'None' will have to be managed some other way.
-    for match in matches:  #c Does this (and next) line do anything?
-        match.search(rp)
     return matches  #c Now a list of spans.
 
 
-def filter_empties(matches):  #c This will now be redundant, or work on 'None' within a list of span tuples.
-    '''removes instances of 'None', which would crash in a 'search'.
-    For some reason, it leaves one 'None' behind, so must run twice!?!'''
-    real_matches = []
-    for match in matches:
-        if match != None:
-            real_matches.append(match)
-        else:
-            continue
-
-    empty = re.compile('', re.IGNORECASE)
-    non_empty = []
-    for match in real_matches:
-        if match != empty:
-            non_empty.append(match)
-    return non_empty
-
-
-def longest_match(i, para_words, rp):
-    '''
+def longest_match(i, para_words, rp, min_wrds=3):
+    """
     Starting from the word at index [i], it keeps adding words from
     the para_words list til the longest match is found with the rp.
-    Returns a regex expression.
-    '''
-    match = compile_regex(0, 0, [''])  # To declare 'match'
-    minwds = 3  # Minimum number of words to check. Define as kwarg?
-    for j in range (minwds, len(para_words) ):  # ie. remainder of list.
+    Returns a list of spans in para_words for each matched section.
+    Warning: there will be overlaps in the spans which are returned.
+    """
+    span = (0, 0)
+
+    for j in range (i, len(para_words) + 1 ):  # ie. remainder of list.
+        print('span at start of longest_match:', span)
         expr = compile_regex(i, j, para_words)
-        #c Some span parallel to expr will have to be created here, and updated after return
-        search_result = expr.findall(rp)
-        if search_result == []:
-            return match  #c This must now return a span tuple.
-        match = expr  #c This will now be a span (see 4 lines up).
+        search_result = expr.search(rp)
+        print(i, j, search_result, expr)###
+        if not search_result:
+            print('no match. span = ', span)###
+            return span
+        elif i + j >= len(para_words) + 1:
+            print('length exceded para_words', span)
+            return span
+        else:
+            span = (i, j)
+            print('match. span =', span)###
 
 
 def compile_regex(i, j, para_words):
-    '''produces the regex search to be check against the rp'''
-    str = r'\W+'.join(para_words[i: i+j])
+    """produces the regex search to be check against the rp"""
+    str = r'\W+'.join(para_words[i: j])
     expr = re.compile(str, re.IGNORECASE)
     return expr
 

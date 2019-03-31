@@ -30,7 +30,7 @@ def doctotext(doc_object):
     return text
 
 
-def prepare_text(text):
+def text_to_wordlist(text):
     '''String -> list - lowercase without punctuation.
     Not called in get_texts(), but called from plagcheck.main()'''
     import string

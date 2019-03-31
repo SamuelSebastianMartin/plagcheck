@@ -33,7 +33,7 @@ References are highlighted (smaller problem)
              spans = []
              n = 0  # Start point for search.
              for match in matches:
-                srch = match.search(sa, pos=n)                                                                                                     
+                srch = match.search(sa, pos=n)
                 if srch != None:
                     span = srch.span()
                 n = span[0] +1
