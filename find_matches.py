@@ -1,9 +1,11 @@
 #! /usr/bin/env python3
 
 import re
-import logging
 
 class Count:
+    """Using a class for the indexes 'i' and 'j' keeps track
+    through the recursion, which does not exit once it reaches
+    the 'return' line."""
     def __init__(self, i, j):
         self.i = i
         self.j = j
@@ -19,9 +21,18 @@ def check_match(sliced, text):
     return srch
 
 def recursive_search(words, text, ct):
+    """
+    Given a starting point, 'i', this function tests successively
+    increasing slices [i:j] of the words list. Returned values are
+    misleading, so the results are read outside the function
+    from the Count class 'ct.i' and 'ct.j'.
+    """
+
     if not check_match(words[ct.i:ct.j], text):
+        # When match fails.
         return (ct.i, ct.j)
     else:
+        # Increment j and rerun funtion recursively.
         ct.j += 1
         if ct.j < len(words):
             recursive_search(words, text, ct)
@@ -30,7 +41,7 @@ def recursive_search(words, text, ct):
             return (ct.i, ct.j)
 
 
-def main():
+def test():
     para_words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight']
     rp = 'one two three four five six'
     matches = []
@@ -41,4 +52,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    test()
