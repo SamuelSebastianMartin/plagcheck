@@ -6,9 +6,9 @@ class Count:
     """Using a class for the indexes 'i' and 'j' keeps track
     through the recursion, which does not exit once it reaches
     the 'return' line."""
-    def __init__(self, i, j):
+    def __init__(self, i):
         self.i = i
-        self.j = j
+        self.j = i + 1
 
 def check_match(sliced, text):
     """
@@ -45,7 +45,7 @@ def test():
     para_words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight']
     rp = 'one two three four five six'
     matches = []
-    ct = Count(1, 3)
+    ct = Count(1)
     recursive_search(para_words, rp, ct)
     span = (ct.i, ct.j - 1)
     print(span)
