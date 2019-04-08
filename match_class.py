@@ -23,13 +23,13 @@ class Match:
         return srch
 
     def get_longest_span(self, words, text):
+        import pdb; pdb.set_trace()
         if not self.found:
             print('not found', self.j)
             return (self.i, self.j-1)
         else:
             print('Found: ', self.found.span())
             self.j += 1
-#            import pdb; pdb.set_trace()
             if self.j < len(words)+1:
                 print('OK', self.j)
                 self.get_longest_span(words, text)  # Recursive

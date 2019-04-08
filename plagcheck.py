@@ -28,17 +28,17 @@ def main():
         text = para.text
         para_words = get_texts.text_to_wordlist(text)
 
+        # Find all plagiarised text, and return list of spans in 'para_words'
         matches = find_matches.find_matches(rp, para_words)
         print(matches)###
-        # Finds all plagiarised text, and returns list of 'para_words' spans
 
+        # Order and sort spans to avoid overlaps and nested spans etc.
         indices = prune_matches.prune_indices(matches)
         print(indices)###
-        # Orders and sorts spans to avoid overlaps etc.
 
+        # Turn 'para_words' list-spans into corresponding 'text' string-spans.
         sa_indices = find_in_sa(text, matches, para_words)
         print(sa_indices)###
-        # Turns 'para_words' list-spans into corresponding 'text' string-spans.
 
         out_doc = write_para(out_doc, text, sa_indices)
 

@@ -7,10 +7,9 @@ class Match:
     def __init__(self, a, b, j):
         self.j = j
 
-
 def finder(match, a, b):
         if b[:match.j] not in a:
-            print('not in', match.j, b[:match.j])
+            print('!!', match.j, b[:match.j])
             return match.j
         else:
             print('ok', match.j, b[:match.j])

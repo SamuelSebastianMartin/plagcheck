@@ -8,52 +8,25 @@ import find_matches
 class TestAdd(unittest.TestCase):
 
     def setUp(self):
-        self.para_words = ['the', 'end', 'of', 'as', 'we', 'know']
-        self.rp = '(The, end. as we know it'
+        self.para_words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six']
+        self.rp = 'one two three four five six'
         self.matches = []
 
-    def test_compile_regex1(self):
-        #  ignores case and punctuation, and finds only
-        #  matches from index i
-        i = 0
-        j = 2
+    def test_check_match1(self):
+        """A good match returns True."""
+        sliced = self.para_words[1:4]
+        match = find_matches.check_match(sliced, self.rp)
+        self.assertTrue(match)
 
-        expr = find_matches.compile_regex(i, j, self.para_words)
-        mo = expr.search(self.rp)
-        result = mo.group()
-        self.assertEqual(result, 'The, end')
+    def test_check_match2(self):
+        """A bad match returns False."""
+        sliced = self.para_words[0:4]
+        match = find_matches.check_match(sliced, self.rp)
+        self.assertFalse(match)
 
-    def test_compile_regex2(self):
-        #  finds only matches from index i, not [0]
-        i = 4
-        j = 2
-
-        expr = find_matches.compile_regex(i, j, self.para_words)
-        mo = expr.search(self.rp)
-        result = mo.group()
-        self.assertEqual(result, 'we know')
-
-    def test_compile_regex3(self):
-        #  functions at end of strings and end of para_words.
-        i = 4
-        j = 2
-        self.rp = '(The, end. as we know'
-
-        expr = find_matches.compile_regex(i, j, self.para_words)
-        mo = expr.search(self.rp)
-        result = mo.group()
-        self.assertEqual(result, 'we know')
-
-    def test_longest_match1(self):
-        #  finds only matches from index i, not [0]
-        i = 4
-        self.para_words = ['the', 'end', 'of', 'as', 'we', 'know', 'it']
-        result = find_matches.longest_match(i, self.para_words, self.rp)
-        answer = re.compile(r'we\W+?know\W+?it', re.IGNORECASE)
-        self.assertEqual(result, answer)
-
-    def test_find_matches(self):
-        pass
+    def test_recursive_search(self):
+        span = find_matches.recursive_search(self.para_words, self.rp, 0, 3)
+        print(span)
 
 if __name__ == '__main__':
     unittest.main()
