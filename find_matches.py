@@ -41,14 +41,27 @@ def recursive_search(words, text, ct):
             return (ct.i, ct.j)
 
 
+def find_matches(text, words):
+    """
+    Takes a text and list of words and, starting from each word
+    successively, it finds the longest slice of the list which
+    is matched in the text. It returns a list of tuples, each
+    representing the start and end of the longest span from
+    each word
+    """
+    spans = []
+    for i in range(len(words)):
+        ct = Count(i)
+        recursive_search(words, text, ct)
+        span = (ct.i, ct.j - 1)
+        spans.append(span)
+    return spans
+
 def test():
-    para_words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight']
-    rp = 'one two three four five six'
-    matches = []
-    ct = Count(1)
-    recursive_search(para_words, rp, ct)
-    span = (ct.i, ct.j - 1)
-    print(span)
+    words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight']
+    text = 'one two three four five six'
+    spans = find_matches(text, words)
+    print(spans)
 
 
 if __name__ == '__main__':
