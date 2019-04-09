@@ -59,14 +59,13 @@ def yield_longest(first, second):
     '''Takes two overlapping spans and returns a non-overlapping equivalent.
     The longest is preserved. Equality favours the second.'''
     if (first[1] - first[0]) > (second[1] - second[0]):
-        second = (first[1] +1, second[1])
+        second = (first[1], second[1])
     else:
-        first = (first[0], second[0] -1)
+        first = (first[0], second[0])
     return first, second
 
 
 def remove_nesting(items):
-    # FAIL
     ''' [(1, 3), (0, 4)] -> [(0, 4)] and
         [(0, 3), (0, 4)] -> [(0, 4)]
     After sort_second(), a span may be fully comprehended in the
