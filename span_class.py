@@ -1,0 +1,19 @@
+#! /usr/bin/env python3
+
+import re
+
+class Span:
+    def __init__(self, text, para_words, span):
+        self.i = span[0]
+        self.j = span[1]
+        self.span = self.set_text_span(para_words, text)
+
+    def set_text_span(self, para_words, text):
+        expr = r'\W+'.join(para_words[self.i : self.j])
+        regx = re.compile(expr, re.IGNORECASE)
+        srch = regx.search(text)
+        if not srch:
+            raise Exception('Search failed in the text (Span class)')
+        else:
+            print(srch.group())
+            return srch.span

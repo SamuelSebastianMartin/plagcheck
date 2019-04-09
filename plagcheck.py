@@ -9,14 +9,17 @@ The essay is processed by paragraph for matches.
 Output is a new MS Word document with copied text in bold type.
 """
 
-import get_texts
-import find_matches
-import prune_matches
 import docx
 import os
 
+import get_texts
+import find_matches
+import prune_matches
+from span_class import Span
+
 
 def main():
+    # Get the texts
     rp_doc, rp, rp_path = get_texts.get_texts()
     sa_doc, sa, sa_path = get_texts.get_texts()
 
@@ -30,17 +33,22 @@ def main():
 
         # Find all plagiarised text, and return list of spans in 'para_words'
         matches = find_matches.find_matches(rp, para_words)
-        print(matches)###
+        print('Matches: ', matches)###
 
         # Order and sort spans to avoid overlaps and nested spans etc.
         indices = prune_matches.prune_indices(matches)
-        print(indices)###
+        print('after pruning :', indices)###
+        span_objs = []
 
         # Turn 'para_words' list-spans into corresponding 'text' string-spans.
-        sa_indices = find_in_sa(text, matches, para_words)
-        print(sa_indices)###
+        sa_spans = []
+        for span in indices:
+            sp = Span(sa, para_words, span)
+            sa_span = (sp.i, sp.j)
+            sa_spans.append(sa_span)
+        print(sa_spans)###
 
-        out_doc = write_para(out_doc, text, sa_indices)
+        out_doc = write_para(out_doc, text, sa_spans)
 
     out_doc.save('OUT.docx')
     os.system('libreoffice OUT.docx')

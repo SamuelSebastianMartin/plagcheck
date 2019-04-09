@@ -16,7 +16,7 @@ def check_match(sliced, text):
     Returns re.seach object, to evaluate as True or False.
     """
     expr = r'\W+'.join(sliced)
-    regx = re.compile(expr)
+    regx = re.compile(expr, re.IGNORECASE)
     srch = regx.search(text)
     return srch
 
