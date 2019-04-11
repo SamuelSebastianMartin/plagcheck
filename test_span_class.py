@@ -11,12 +11,12 @@ class TestSpan(unittest.TestCase):
 
     def test_get_regex1(self):
         sp = Span(self.text, self.para_words, (1, 3))
-        result = sp.span()
+        result = sp.span
         answer = (6, 16)
         self.assertEqual(result, answer)
 
     def test_get_regex2(self):
         sp = Span(self.text, self.para_words, (0, 4))
-        result = sp.span()
+        result = sp.span
         answer = (0, 20)
         self.assertEqual(result, answer)

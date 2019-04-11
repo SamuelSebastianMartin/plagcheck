@@ -41,11 +41,14 @@ def main():
         span_objs = []
 
         # Turn 'para_words' list-spans into corresponding 'text' string-spans.
+        import pdb;pdb.set_trace()
         sa_spans = []
         for span in indices:
             sp = Span(sa, para_words, span)
-            sa_span = (sp.i, sp.j)
+            sa_span = (sp.span[0], sp.span[1])
             sa_spans.append(sa_span)
+        # Remove empty spans
+        sa_spans = [span for span in sa_spans if not span == (0, 0)]
         print(sa_spans)###
 
         out_doc = write_para(out_doc, text, sa_spans)
@@ -53,23 +56,6 @@ def main():
     out_doc.save('OUT.docx')
     os.system('libreoffice OUT.docx')
 
-
-def find_in_sa(sa, matches, para_words):  ## Change to work with spans, not regex.
-    """
-    Takes the list-spans that tested positive in the reading pack, and finds
-    the corresponding text-spans in the essay text.
-    These text-spans are returned as a list.
-    """
-    spans = []
-    n = 0  # Start point for search.
-    for match in matches:
-#        srch = match.search(sa, pos=n)
-#        if srch != None:
-#            span = srch.span()
-#            n = span[0] +1  ## can change to end of last span b.. already sorted?
-            spans.append(span)
-
-    return spans
 
 def write_para(out_doc, text, indices):
     p = out_doc.add_paragraph()
@@ -80,7 +66,7 @@ def write_para(out_doc, text, indices):
         j = span[0]  # End of unplagiarised section.
         p.add_run(text[i: j])
         p.add_run(text[span[0]: span[1]]).underline = True
-        if span[1] < len(text):
+        if span[1] <= len(text):
             i = span[1]
 
     p.add_run(text[i: len(text)])  # Tail end of good text.

@@ -38,7 +38,7 @@ def recursive_search(words, text, ct):
             recursive_search(words, text, ct)
         else:
             # If end of 'words' list reached.
-            return (ct.i, ct.j)
+            return (ct.i, ct.j-1)  # -1 cos j was ++ once too often
 
 
 def find_matches(text, words):
@@ -53,16 +53,20 @@ def find_matches(text, words):
     for i in range(len(words)):
         ct = Count(i)
         recursive_search(words, text, ct)
-        span = (ct.i, ct.j - 1)
+        span = (ct.i, ct.j)
         spans.append(span)
     return spans
 
-def test():
-    words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight']
-    text = 'one two three four five six'
-    spans = find_matches(text, words)
-    print(spans)
-
-
-if __name__ == '__main__':
-    test()
+#def test():
+#    """
+#    Leave this commented out to avoid these local values
+#    for 'words' and 'text' overriding the genuine input
+#    """
+#    words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight']
+#    text = 'one two three four five six'
+#    spans = find_matches(text, words)
+#    print(spans)
+#
+#
+#if __name__ == '__main__':
+#    test()

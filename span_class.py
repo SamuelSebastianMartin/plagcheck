@@ -3,6 +3,12 @@
 import re
 
 class Span:
+    """
+    A class to find the index span of a string, which regex
+    an index slice of a word list.
+    i and j are the indices of the list span, para_words
+    span is the tuple with the text indices.
+    """
     def __init__(self, text, para_words, span):
         self.i = span[0]
         self.j = span[1]
@@ -16,4 +22,4 @@ class Span:
             raise Exception('Search failed in the text (Span class)')
         else:
             print(srch.group())
-            return srch.span
+            return srch.span()
