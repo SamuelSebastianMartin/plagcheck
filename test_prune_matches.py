@@ -16,7 +16,6 @@
 '''
 import unittest
 import prune_matches
-import os
 
 
 class TestPruneIndices(unittest.TestCase):
@@ -28,81 +27,81 @@ class TestPruneIndices(unittest.TestCase):
         self.assertEqual(result, answer)
 
     def test_prune_indices2(self):
-        data = [(10, 20),(12, 18)]
+        data = [(10, 20), (12, 18)]
         answer = [(10, 20)]
         result = prune_matches.prune_indices(data)
         self.assertEqual(result, answer)
 
     def test_prune_indices3(self):
-        data = [(10, 20),(10, 20)]
+        data = [(10, 20), (10, 20)]
         answer = [(10, 20)]
         result = prune_matches.prune_indices(data)
         self.assertEqual(result, answer)
 
     def test_prune_indices4(self):
-        data = [(10, 20),(10, 12)]
+        data = [(10, 20), (10, 12)]
         answer = [(10, 20)]
         result = prune_matches.prune_indices(data)
         self.assertEqual(result, answer)
 
     def test_prune_indices5(self):
-        data = [(10, 20),(18, 20)]
+        data = [(10, 20), (18, 20)]
         answer = [(10, 20)]
         result = prune_matches.prune_indices(data)
         self.assertEqual(result, answer)
 
     def test_prune_indices6(self):
-        data = [(10, 20),(8, 10)]
+        data = [(10, 20), (8, 10)]
         answer = [(8, 10), (10, 20)]
         result = prune_matches.prune_indices(data)
         self.assertEqual(result, answer)
 
     def test_prune_indices7(self):
         # No real overlap
-        data = [(10, 20),(20, 22)]
-        answer = [(10, 20),(20, 22)]
+        data = [(10, 20), (20, 22)]
+        answer = [(10, 20), (20, 22)]
         result = prune_matches.prune_indices(data)
         self.assertEqual(result, answer)
 
     def test_prune_indices8(self):
-        data = [(10, 20),(8, 12)]
+        data = [(10, 20), (8, 12)]
         answer = [(8, 10), (10, 20)]
         result = prune_matches.prune_indices(data)
         self.assertEqual(result, answer)
 
     def test_prune_indices9(self):
-        data = [(10, 20),(18, 22)]
-        answer = [(10, 20),(20, 22)]
+        data = [(10, 20), (18, 22)]
+        answer = [(10, 20), (20, 22)]
         result = prune_matches.prune_indices(data)
         self.assertEqual(result, answer)
 
     def test_prune_indices10(self):
-        data = [(10, 20),(8, 20)]
+        data = [(10, 20), (8, 20)]
         answer = [(8, 20)]
         result = prune_matches.prune_indices(data)
         self.assertEqual(result, answer)
 
     def test_prune_indices11(self):
-        data = [(10, 20),(10, 22)]
+        data = [(10, 20), (10, 22)]
         answer = [(10, 22)]
         result = prune_matches.prune_indices(data)
         self.assertEqual(result, answer)
 
     def test_prune_indices12(self):
-        data = [(10, 20),(5, 25)]
+        data = [(10, 20), (5, 25)]
         answer = [(5, 25)]
         result = prune_matches.prune_indices(data)
         self.assertEqual(result, answer)
 
     def test_prune_indices13(self):
-        data = [(10, 20),(5, 8)]
+        data = [(10, 20), (5, 8)]
         answer = [(5, 8), (10, 20)]
         result = prune_matches.prune_indices(data)
         self.assertEqual(result, answer)
 
     def test_prune_indices14(self):
-        data = [(10, 20),(22, 25)]
-        answer = [(10, 20),(22, 25)]
+        data = [(10, 20), (22, 25)]
+        answer = [(10, 20), (22, 25)]
         result = prune_matches.prune_indices(data)
         self.assertEqual(result, answer)
 
@@ -115,6 +114,7 @@ class TestSortSecond(unittest.TestCase):
         answer = [(2, 1), (1, 2)]
         result = prune_matches.sort_second(data)
         self.assertEqual(result, answer)
+
 
 class TestRemoveSubsets(unittest.TestCase):
 
@@ -132,6 +132,7 @@ class TestRemoveSubsets(unittest.TestCase):
         result = prune_matches.remove_subsets(data)
         self.assertEqual(result, answer)
 
+
 class TestSplitOverlaps(unittest.TestCase):
 
     def test_split_overlaps(self):
@@ -139,6 +140,7 @@ class TestSplitOverlaps(unittest.TestCase):
         answer = [(1, 7), (7, 9)]
         result = prune_matches.split_overlaps(data)
         self.assertEqual(result, answer)
+
 
 class TestYieldLongest(unittest.TestCase):
 
@@ -154,6 +156,7 @@ class TestYieldLongest(unittest.TestCase):
         small = (6, 8)
         first, second = prune_matches.yield_longest(big, small)
         self.assertEqual(second, (7, 8))
+
 
 class TestRemoveNesting(unittest.TestCase):
 
@@ -178,14 +181,15 @@ class TestRemoveNesting(unittest.TestCase):
         result = prune_matches.remove_nesting(data)
         self.assertEqual(result, answer)
 
+
 class TestNonSpecific(unittest.TestCase):
 
     def test_consecutive(self):
-        data = [(10, 20),(20, 25)]
-        answer = [(10, 20),(20, 25)]
+        data = [(10, 20), (20, 25)]
+        answer = [(10, 20), (20, 25)]
         result = prune_matches.prune_indices(data)
         self.assertEqual(result, answer)
 
 
 if __name__ == '__main__':
-    unittest(main)
+    unittest.main()

@@ -45,6 +45,7 @@ def remove_subsets(ordered_matches):
 
     return ordered_matches
 
+
 def split_overlaps(spans):
     '''When 2 runs overlap, the longest is preserved.
     eg [(1, 5), (4, 6)] -> [(1, 5), (6, 6)]

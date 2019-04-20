@@ -12,6 +12,7 @@ Output is a new MS Word document with copied text in bold type.
 import docx
 import os
 
+import build_document
 import get_texts
 import find_matches
 import prune_matches
@@ -33,44 +34,44 @@ def main():
 
         # Find all plagiarised text, and return list of spans in 'para_words'
         matches = find_matches.find_matches(rp, para_words)
-        print('Matches: ', matches)###
+        print('Matches: ', matches)  # ##
 
         # Order and sort spans to avoid overlaps and nested spans etc.
         indices = prune_matches.prune_indices(matches)
-        print('after pruning :', indices)###
+        print('after pruning :', indices)  # ##
         span_objs = []
 
         # Turn 'para_words' list-spans into corresponding 'text' string-spans.
         sa_spans = []
         for span in indices:
-            sp = Span(sa, para_words, span)
+            sp = Span(text, para_words, span)
             sa_span = (sp.span[0], sp.span[1])
             sa_spans.append(sa_span)
         # Remove empty spans
         sa_spans = [span for span in sa_spans if not span == (0, 0)]
         build_document.build_document(text, sa_spans)
 
-#        out_doc = write_para(out_doc, text, sa_spans)
-#
-#    out_doc.save('OUT.docx')
-#    os.system('libreoffice OUT.docx')
-#
-#
-#def write_para(out_doc, text, indices):
-#    p = out_doc.add_paragraph()
-#
-#    i = 0
-#    j = 0
-#    for span in indices:
-#        j = span[0]  # End of unplagiarised section.
-#        p.add_run(text[i: j])
-#        p.add_run(text[span[0]: span[1]]).underline = True
-#        if span[1] <= len(text):
-#            i = span[1]
-#
-#    p.add_run(text[i: len(text)])  # Tail end of good text.
-#
-#    return out_doc
+        out_doc = write_para(out_doc, text, sa_spans)
+
+    out_doc.save('OUT.docx')
+    os.system('libreoffice OUT.docx')
+
+
+def write_para(out_doc, text, indices):
+    p = out_doc.add_paragraph()
+
+    i = 0
+    j = 0
+    for span in indices:
+        j = span[0]  # End of unplagiarised section.
+        p.add_run(text[i: j])
+        p.add_run(text[span[0]: span[1]]).underline = True
+        if span[1] <= len(text):
+            i = span[1]
+
+    p.add_run(text[i: len(text)])  # Tail end of good text.
+
+    return out_doc
 
 
 if __name__ == '__main__':

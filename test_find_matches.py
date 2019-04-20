@@ -1,6 +1,5 @@
 #! /usr/bin/env/ python3
 
-import re
 import unittest
 import find_matches
 
@@ -8,7 +7,10 @@ import find_matches
 class TestNoPunctuation(unittest.TestCase):
 
     def setUp(self):
-        self.para_words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight']
+        self.para_words = [
+                'zero', 'one', 'two', 'three', 'four',
+                'five', 'six', 'seven', 'eight'
+                ]
         self.rp = 'one two three four five six'
         self.matches = []
 
@@ -66,7 +68,10 @@ class TestNoPunctuation(unittest.TestCase):
 class TestWithPunctuation(unittest.TestCase):
 
     def setUp(self):
-        self.para_words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight']
+        self.para_words = [
+                'zero', 'one', 'two', 'three', 'four',
+                'five', 'six', 'seven', 'eight'
+                ]
         self.rp = '{One, two!!! three -Four (five)six'
         self.matches = []
 

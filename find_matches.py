@@ -2,6 +2,7 @@
 
 import re
 
+
 class Count:
     """Using a class for the indexes 'i' and 'j' keeps track
     through the recursion, which does not exit once it reaches
@@ -9,6 +10,7 @@ class Count:
     def __init__(self, i):
         self.i = i
         self.j = i + 1
+
 
 def check_match(sliced, text):
     """
@@ -19,6 +21,7 @@ def check_match(sliced, text):
     regx = re.compile(expr, re.IGNORECASE)
     srch = regx.search(text)
     return srch
+
 
 def recursive_search(words, text, ct):
     """
@@ -56,17 +59,3 @@ def find_matches(text, words):
         span = (ct.i, ct.j)
         spans.append(span)
     return spans
-
-#def test():
-#    """
-#    Leave this commented out to avoid these local values
-#    for 'words' and 'text' overriding the genuine input
-#    """
-#    words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight']
-#    text = 'one two three four five six'
-#    spans = find_matches(text, words)
-#    print(spans)
-#
-#
-#if __name__ == '__main__':
-#    test()

@@ -13,3 +13,5 @@ texts/
 docx_example.py
 *.old
 *.docx
+tags
+support_matterials/

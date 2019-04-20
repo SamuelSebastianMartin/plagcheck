@@ -5,6 +5,7 @@ import unittest
 
 import build_document
 
+
 class TestTextSpan(TestCase):
 
     def test_TextSpan(self):
@@ -34,6 +35,7 @@ class TestSpansToTextspans(TestCase):
             self.assertEqual(sps[n].i, self.sa_spans[n][0])
             self.assertEqual(sps[n].j, self.sa_spans[n][1])
 
+
 class TestBuildDocuments(TestCase):
 
     def setUp(self):
@@ -50,7 +52,15 @@ class TestBuildDocuments(TestCase):
         outspans = build_document.build_document('dummy.', [(0, 5)])
         self.assertEqual(outspans[-1].j, len('dummy.')-1)
 
+    def test_full_text_len(self):
+        # The combined TextSpan text is the same length as 'text'.
+        print(self.text)  ##
+        outspans = build_document.build_document(self.text, self.sa_spans)
+        newtext = ''
+        for sp in outspans:
+            newtext = newtext + newtext[sp.i: sp.j]
+        self.assertEqual(newtext, 0)
+
 
 if __name__ == '__main__':
     unittest.main()
-
