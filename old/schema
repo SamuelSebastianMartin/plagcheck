@@ -1,0 +1,38 @@
+
+ ____________________
+|                    |  Print explanation and get any imput about sensitivity
+|                    |
+|   Welcome()        |
+|                    |
+|____________________|
+ __________|_________
+|                    |  Use 'filepicker' module to select the texts
+|                    |  that will be compared.
+|  Get_text_names()  |
+|                    |
+|____________________|
+ __________|_________
+|                    |  MODULE:
+|                    |  - Open_text()
+|  Get_texts()       |  - Prepare_text()
+|                    |
+|____________________|
+ __________|_________
+|                    |  MODULE:  crawls through sa finding matches in rp.
+|                    |  - Find_occurrences() of each sa word in the rp.
+|  Find_matches()    |  - Longest_match() between texts, for each occurrence.
+|                    |      > Longstring_only() rejects shortest match.
+|____________________|
+ __________|_________
+|                    |  Remove strings with fewer than X=3 words.
+|                    |
+|  Filter()          |
+|                    |
+|____________________|
+ __________|_________
+|                    |  Present results
+|                    |
+|  results()         |
+|                    |
+|____________________|
+
