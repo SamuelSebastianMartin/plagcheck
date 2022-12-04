@@ -1,15 +1,6 @@
 backups
-full_text_test_space
-__pycache__
-trial_texts
-py_unittest.template
-logging_module.py
-stopwords.txt
-zipper
+pycodestyle.py
 *.swp
 *.pdf
-docx_example.py
-texts/
-docx_example.py
 *.old
 *.docx
