@@ -1,7 +1,6 @@
 #! /usr/bin/env/ python3
 
 import unittest
-import regex
 
 import CheckMatch as Ch
 

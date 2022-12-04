@@ -4,10 +4,10 @@ import string
 
 class CheckMatch:
     def __init__(self, needle, haystack):
-        self.needle = needle
+        self.needle = self.string_to_regex(needle)
         self.haystack = haystack
 
-    def string_to_regex(text: str) -> str:
+    def string_to_regex(self, text: str) -> str:
         """
         Takes a string and returns a lowercase list of words, separated by
         a regular expression that matches any punctuation or spaces
@@ -18,7 +18,7 @@ class CheckMatch:
         text_words = text.split()
         return r"\W+".join(text_words)
 
-    def text_match(needle: str, haystack: str) -> bool:
+    def text_match(self, needle: str, haystack: str) -> bool:
         """
         Performs a regex search, ignoring case,
         punctuation and multiple spaces.
