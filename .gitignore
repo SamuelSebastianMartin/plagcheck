@@ -4,3 +4,4 @@ pycodestyle.py
 *.pdf
 *.old
 *.docx
+__pycache__

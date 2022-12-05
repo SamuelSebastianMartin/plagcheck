@@ -7,8 +7,4 @@ In order to facilitate the running of python's 'unittest', I have also decided t
 
 ## THIS VERSION
 
-I am changing the flow so that it processes paragraph objects. This way I can create an output document that looks quite like the original.
-
-I am finding matches using regex. This means that double spaces, captial letters and punctuation in the original essay can be preserved when printing the results. It also allows the possibility of skipping words that the student has added.
-
-The basic functioning will be the same, but now the sa text will consist of only one paragraph of the essay at a time.
+I'm starting from scratch, 4 years later. The aim is to minimalise the process, with fewer nested loops and less conversion between lists and strings. I hope the code will be much simpler, even if some aspects are not completely efficient.
