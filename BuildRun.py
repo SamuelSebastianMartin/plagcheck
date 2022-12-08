@@ -1,39 +1,66 @@
 #! /usr/bin/env/ python3
 
 import re
-import CheckMatch as Cm
 
-orig = "the quick brown fox"
-para = "quick brown" # one paragraph (précis of the original text).
-#i = 0 # the index that will work slowly through the paragraph.
-#para_unfinished = True
-#
-#def build_run(para, orig, i):
-#    next_white_space = re.search(r'\W+', para, i).span()[1]
-#    print(next_white_space)
-#    i = next_white_space
-#    if i < len(para):
-#        build_run(para, orig, i)
-#    else:
-#        break
-#
-#build_run(para, orig, i)
 
 class BuildRun:
     def __init__(self, orig, para, start_index):
         self.orig = orig
         self.para = para
         self.i = start_index
-        self.j = self.next_whitespace()
-        self.category = []
+        self.j = self.i # end of run index
+        self.lastWordLen = 0
+        self.truthlist = []
+        self.currentRegex = r"\W+"
 
-    def next_whitespace(self):
+    def add_word(self):
 
         """
-        Finds the index of the next gap between words.
-        This will include all punctuation, so effectively
-        stops just before the next word.
-        `para` is sliced from the start index to the end,
-        and the index of the end of the whitespace returned.
+        add_word performs 2 functions:
+        1. It adds the next text word to the currentRegex search sting.
+        2. It records the length of the last-added word
         """
-        return re.search(r'\W+', para[self.i:]).span()[1]
+        new_word = re.search(r'\w+', self.para[self.j:])
+        if new_word: # prevents overrunning
+            self.lastWordLen =  new_word.span()[1]
+            next_word = new_word.group()
+            self.currentRegex = self.currentRegex + r'\W+' + next_word
+        else:
+            self.terminate_run()
+
+    def search_for_match(self):
+        """
+        Performs a regex search, ignoring case,
+        punctuation and multiple spaces.
+        """
+        srch = re.compile(self.currentRegex, re.IGNORECASE)
+        return re.search(srch, self.orig)
+
+    def build_run(self):
+        """
+        Finds the longest string in self.para starting as index self.i
+        which is either all in the orig or all not in the orig.
+        Words are added to the search one by one, and each time the 
+        True or False of the match is recorded in truthlist.
+        If the latest addition does not match the others, the run is
+        terminated. E.g., if the truthlist = [T, T, T], and the next
+        search returns False [T, T, T, F], the run ends and the last
+        word is removed. Similarly, [F, F, F, T] would end the run.
+        """
+        self.add_word()
+        self.truthlist.append(self.search_for_match()) # add T or F
+        # For runs of only one word, go again.
+        if len(self.truthlist) < 1:
+            self.j += self.lastWordLen
+            self.build_run()
+        # If latest value differs from the first, end the process
+        if self.truthlist[-1] == self.truthlist[0]:
+            self.j += self.lastWordLen
+            self.build_run()
+        else:
+            self.terminate_run()
+
+    def terminate_run(self):
+        self.j -= self.lastWordLen # Remove last not-matching word
+        self.run = para[self.i, self.j]
+        self.plagStatus = self.truthlist[0]
