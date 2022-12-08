@@ -1,31 +1,21 @@
 #! /usr/bin/env/ python3
 
 import unittest
+from BuildRun import BuildRun
 
-import CheckMatch as Ch
+orig = "the quick brown fox"
+para = "quick brown cat" # one paragraph (précis of the original text).
 
+class TestBuildRun(unittest.TestCase):
 
-class TestRegex(unittest.TestCase):
+    def test_next_whitespace1(self):
+        run1 = BuildRun(para, orig, 0)
+        space1 = run1.next_whitespace()
+        self.assertEqual(space1, 6)
 
-    def test_double_space_haystack(self):
-        needle = "one two"
-        haystack = "  one   two    many spaces"
-        self.assertTrue(Ch.CheckMatch(needle, haystack))
-
-    def test_double_space_needle(self):
-        needle = "   one      two   "
-        haystack = "one two"
-        self.assertTrue(Ch.CheckMatch(needle, haystack))
-
-    def test_punctuation_needle(self):
-        needle = ",!one,' %& +-two"
-        haystack = "one two"
-        self.assertTrue(Ch.CheckMatch(needle, haystack))
-
-    def test_punctuation_haystack(self):
-        needle = "one two"
-        haystack = ",!one,' %& +-two"
-        self.assertTrue(Ch.CheckMatch(needle, haystack))
+#        run2 = BuildRun(para, orig, 6)
+#        space2 = run1.next_whitespace()
+#        self.assertEqual(space2, 12)
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,3 +1,5 @@
+#! /usr/bin/env/ python3
+
 import re
 import CheckMatch as Cm
 
@@ -18,7 +20,7 @@ para = "quick brown" # one paragraph (précis of the original text).
 #build_run(para, orig, i)
 
 class BuildRun:
-    def __init__(orig, para, start_index):
+    def __init__(self, orig, para, start_index):
         self.orig = orig
         self.para = para
         self.i = start_index
@@ -34,4 +36,4 @@ class BuildRun:
         `para` is sliced from the start index to the end,
         and the index of the end of the whitespace returned.
         """
-        return(re.search(r'\W+', para[self.i:]).span()[1]
+        return re.search(r'\W+', para[self.i:]).span()[1]
