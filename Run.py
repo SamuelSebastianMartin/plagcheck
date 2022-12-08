@@ -3,7 +3,7 @@
 import re
 
 
-class BuildRun:
+class Run:
     def __init__(self, orig, para, start_index):
         self.orig = orig
         self.para = para
@@ -24,7 +24,7 @@ class BuildRun:
         if new_word: # prevents overrunning
             self.lastWordLen =  new_word.span()[1]
             next_word = new_word.group()
-            self.currentRegex = self.currentRegex + r'\W+' + next_word
+            self.currentRegex = self.currentRegex + next_word + r'\W+'
         else:
             self.terminate_run()
 
@@ -47,8 +47,14 @@ class BuildRun:
         search returns False [T, T, T, F], the run ends and the last
         word is removed. Similarly, [F, F, F, T] would end the run.
         """
+        # Add one word to the search string/regex
         self.add_word()
-        self.truthlist.append(self.search_for_match()) # add T or F
+        # Record if it is a match or not
+        if self.search_for_match():
+            self.truthlist.append(True)
+        else:
+            self.truthlist.append(False)
+
         # For runs of only one word, go again.
         if len(self.truthlist) < 1:
             self.j += self.lastWordLen
@@ -61,6 +67,7 @@ class BuildRun:
             self.terminate_run()
 
     def terminate_run(self):
+#        import pdb; pdb.set_trace()
         self.j -= self.lastWordLen # Remove last not-matching word
-        self.run = para[self.i, self.j]
+        self.run = self.para[self.i: self.j]
         self.plagStatus = self.truthlist[0]
