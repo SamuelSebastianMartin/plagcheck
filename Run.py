@@ -67,7 +67,5 @@ class Run:
             self.terminate_run()
 
     def terminate_run(self):
-#        import pdb; pdb.set_trace()
-        self.j -= self.lastWordLen # Remove last not-matching word
         self.run = self.para[self.i: self.j]
         self.plagStatus = self.truthlist[0]

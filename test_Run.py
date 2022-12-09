@@ -38,10 +38,20 @@ class TestRun(unittest.TestCase):
         result = run.search_for_match()
         self.assertFalse(result)
 
-    def test_build_run(self):
+    def test_build_run1(self):
         run = Run(orig, para, 0)
         run.build_run()
         self.assertEqual(run.run, 'quick brown')
+
+    def test_build_run2(self):
+        run = Run(orig, 'quick cat', 0)
+        run.build_run()
+        self.assertEqual(run.run, 'quick')
+
+    def test_build_run3(self):
+        run = Run(orig, 'fox', 0)
+        run.build_run()
+        self.assertEqual(run.run, 'fox')
 
 if __name__ == '__main__':
     unittest.main()
