@@ -51,6 +51,7 @@ class TestRun(unittest.TestCase):
     def test_build_run3(self):
         run = Run(orig, 'fox', 0)
         run.build_run()
+        import pdb; pdb.set_trace()
         self.assertEqual(run.run, 'fox')
 
 if __name__ == '__main__':

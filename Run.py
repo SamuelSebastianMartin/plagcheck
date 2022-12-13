@@ -55,8 +55,12 @@ class Run:
         else:
             self.truthlist.append(False)
 
+        # Handle last word in para cases. !!!!! PROBLEMS IN THESE FEW LINES
+        remainingText = self.para[self.j + self.lastWordLen: ]
+        if len(self.para) <= self.j + self.lastWordLen + 1:
+            self.terminate_run()
         # For runs of only one word, go again.
-        if len(self.truthlist) < 1:
+        if len(self.truthlist) <= 1:
             self.j += self.lastWordLen
             self.build_run()
         # If latest value differs from the first, end the process
