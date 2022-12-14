@@ -48,11 +48,11 @@ class TestRun(unittest.TestCase):
         run.build_run()
         self.assertEqual(run.run, 'quick')
 
-#    def test_build_run3(self):
-#        run = Run(orig, 'fox', 0)
-#        run.build_run()
-#        import pdb; pdb.set_trace()
-#        self.assertEqual(run.run, 'fox')
-#
+    def test_build_run3(self):
+        run = Run(orig, 'fox', 0)
+        run.build_run()
+        import pdb; pdb.set_trace()
+        self.assertEqual(run.run, 'fox')
+
 if __name__ == '__main__':
     unittest.main()

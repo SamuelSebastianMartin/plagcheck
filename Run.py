@@ -12,9 +12,9 @@ class Run:
         self.lastWordLen = 0
         self.category = []
         self.currentRegex = r"\W+"
+        self.allowRecursion = True
 
     def add_word(self):
-
         """
         add_word performs 2 functions:
         1. It adds the next text word to the currentRegex search sting.
@@ -39,31 +39,40 @@ class Run:
 
     def build_run(self):
         """
-        Finds the longest string in self.para starting as index self.i
-        which is either all in the orig or all not in the orig.
-        Words are added to the search one by one, and each time the 
-        True or False of the match is recorded in category.
-        If the latest addition does not match the others, the run is
-        terminated. E.g., if the category = [T, T, T], and the next
-        search returns False [T, T, T, F], the run ends and the last
-        word is removed. Similarly, [F, F, F, T] would end the run.
+            Starting at index self.i of self.para, this builds
+            a single run of consecutive words. The entire run
+            is either
+              a) a direct word-for-word of text in self.orig
+              b) a string of words none of which appear in
+              self.orig
+            Each loop of this recursive method adds one word
+            to the string, and tests for a match in self.orig
+            The True/False status of the match is saved in
+            self.category. If the latest addition does not
+            match the others, the run is terminated.
+            E.g., if the category = [T, T, T], and the next
+            search returns False [T, T, T, F], the run ends
+            and the last word is removed. Similarly,
+            [F, F, F, T] would end the run.
         """
-        # Add one word to the search string/regex
-        self.add_word()
-        # Record if it is a match or not
-        if self.search_for_match():
-            self.category.append(True)
-        else:
-            self.category.append(False)
+        while self.allowRecursion:
+            # Add one word to the search string/regex
+            self.add_word()
+            # Record if it is a match or not
+            if self.search_for_match():
+                self.category.append(True)
+            else:
+                self.category.append(False)
 
-        # If latest value differs from the first, end the process
-        if self.category[-1] == self.category[0]:
-            self.j += self.lastWordLen
-            self.build_run()
-        else:
-            self.terminate_run()
+            # If latest value differs from the first, end the process
+            if self.category[-1] == self.category[0]:
+                self.j += self.lastWordLen
+                self.build_run()
+            else:
+                self.terminate_run()
 
     def terminate_run(self):
+        self.allowRecursion = False
         self.run = self.para[self.i: self.j]
         self.plagStatus = self.category[0]
         print('terminating run')
