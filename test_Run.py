@@ -42,17 +42,35 @@ class TestRun(unittest.TestCase):
         run = Run(orig, para, 0)
         run.build_run()
         self.assertEqual(run.run, 'quick brown')
+        self.assertTrue(run.category[0])
 
     def test_build_run2(self):
         run = Run(orig, 'quick cat', 0)
         run.build_run()
         self.assertEqual(run.run, 'quick')
+        self.assertTrue(run.category[0])
 
     def test_build_run3(self):
         run = Run(orig, 'fox', 0)
         run.build_run()
-        import pdb; pdb.set_trace()
         self.assertEqual(run.run, 'fox')
+        self.assertFalse(run.category[0])
+
+    def test_build_run_punctuation1(self):
+        orig = "all the punctuation is in para"
+        para = "all, !the? 'punctuation,' is in! para"
+        run = Run(orig, para, 0)
+        run.build_run()
+        self.assertEqual(run.run, para)
+
+    def test_build_run_punctuation2(self):
+        orig = "all - the 'punctuation' is!? in, orig"
+        para = "all the punctuation is in orig"
+        run = Run(orig, para, 0)
+        run.build_run()
+        self.assertEqual(run.run, para)
+        self.assertTrue(run.category[0])
+
 
 if __name__ == '__main__':
     unittest.main()

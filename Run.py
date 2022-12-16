@@ -11,8 +11,9 @@ class Run:
         self.j = self.i # end of run index
         self.lastWordLen = 0
         self.category = []
-        self.currentRegex = r"\W+"
+        self.currentRegex = r"\W*"
         self.allowRecursion = True
+        self.run = None
 
     def add_word(self):
         """
@@ -32,7 +33,7 @@ class Run:
         """
         Performs a regex search, ignoring case,
         punctuation and multiple spaces.
-        returns an re.match object
+        Returns an re.match object
         """
         srch = re.compile(self.currentRegex, re.IGNORECASE)
         return re.search(srch, self.orig)
@@ -57,6 +58,7 @@ class Run:
         """
         while self.allowRecursion:
             # Add one word to the search string/regex
+#            import pdb; pdb.set_trace()
             self.add_word()
             # Record if it is a match or not
             if self.search_for_match():
@@ -72,7 +74,9 @@ class Run:
                 self.terminate_run()
 
     def terminate_run(self):
+        """
+        Ends any recursive processes, and sets
+        the final values for the run
+        """
         self.allowRecursion = False
         self.run = self.para[self.i: self.j]
-        self.plagStatus = self.category[0]
-        print('terminating run')
