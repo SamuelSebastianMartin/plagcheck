@@ -25,7 +25,7 @@ class Run:
         if nextWord: # prevents overrunning
             self.lastWordLen =  nextWord.span()[1]
             word = nextWord.group()
-            self.currentRegex = self.currentRegex + word + r'\W+'
+            self.currentRegex = self.currentRegex + word + r'\W*?'
         else:
             self.terminate_run()
 
