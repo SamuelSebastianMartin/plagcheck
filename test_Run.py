@@ -81,10 +81,10 @@ class TestRun(unittest.TestCase):
 
     def test_build_run_punctuation3(self):
         orig = "!?'punctuation at start and end'£$"
-        para = "$ all the punctuation is in orig!!!"
+        para = "! ?'punctuation at start and end'£$"
         run = Run(orig, para, 0)
         run.build_run()
-        self.assertEqual(run.run, '$ all the punctuation is in orig')
+        self.assertEqual(run.run, "! ?'punctuation at start and end")
         self.assertTrue(run.category[0])
 
 

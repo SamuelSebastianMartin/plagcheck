@@ -58,7 +58,6 @@ class Run:
         """
         while self.allowRecursion:
             # Add one word to the search string/regex
-#            import pdb; pdb.set_trace()
             self.add_word()
             # Record if it is a match or not
             if self.search_for_match():
